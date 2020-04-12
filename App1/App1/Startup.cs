@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using App1.Context;
 using App1.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,13 +27,13 @@ namespace App1
         public void ConfigureServices(IServiceCollection services)
         {
             //sadece bir tane message service objesi.
-            //services.AddSingleton<MessageService>();
+            services.AddSingleton<BookContext>();
 
             //her connectte message service objesi yaratılır.
             services.AddScoped<MessageService>();
 
             //her requestte message servie oluşturulur.
-            //services.AddTransient<MessageService>();
+            services.AddTransient<BookService>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -66,7 +67,7 @@ namespace App1
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Message}/{action=Index}/{id?}");
+                    template: "{controller=Book}/{action=Index}/{id?}");
             });
         }
     }
