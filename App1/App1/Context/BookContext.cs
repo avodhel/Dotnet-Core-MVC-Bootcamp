@@ -27,6 +27,13 @@ namespace App1.Context
                     Author = "Michael Ende",
                     Name = "Momo",
                     Publisher = "Kırmızı Kedi Yayınları"
+                },
+                new BookEntity
+                {
+                    Id = 3,
+                    Author = "Author1",
+                    Name = "Book1",
+                    Publisher = "Publisher1"
                 }
             };
         }

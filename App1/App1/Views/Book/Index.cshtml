@@ -11,7 +11,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-3"> <h2>Sıra No</h2></div>
+        <div class="col-md-1"> <h2>Sıra No</h2></div>
         <div class="col-md-3"> <h2>Kitap Adı</h2></div>
         <div class="col-md-3"> <h2>Yazar</h2></div>
         <div class="col-md-3"> <h2>Yayın Evi</h2></div>
@@ -19,10 +19,12 @@
     @foreach (var book in Model)
     {
         <div class="row">
-            <div class="col-md-3"> <p>@book.Id</p></div>
+            <div class="col-md-1"> <p>@book.Id</p></div>
             <div class="col-md-3"> <p>@book.Name</p></div>
             <div class="col-md-3"> <p>@book.Author</p></div>
             <div class="col-md-3"> <p>@book.Publisher</p></div>
+            <div class="col-md-1"> <a class="btn btn-primary" href="Book/Edit?id=@book.Id">Düzenle</a></div>
+            <div class="col-md-1"> <a class="btn btn-danger" href="Book/Delete?id=@book.Id">Sil</a></div>
         </div>
     }
 </div>

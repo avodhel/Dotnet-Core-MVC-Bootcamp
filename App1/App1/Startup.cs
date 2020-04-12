@@ -29,10 +29,10 @@ namespace App1
             //sadece bir tane message service objesi.
             services.AddSingleton<BookContext>();
 
-            //her connectte message service objesi yaratılır.
+            //her connectte message service objesi.
             services.AddScoped<MessageService>();
 
-            //her requestte message servie oluşturulur.
+            //her requestte message service objesi.
             services.AddTransient<BookService>();
 
             services.Configure<CookiePolicyOptions>(options =>

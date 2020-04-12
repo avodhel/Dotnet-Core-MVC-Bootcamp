@@ -20,5 +20,23 @@ namespace App1.Services
         {
             return _bookContext.Books;
         }
+
+        public BookEntity Get(int id)
+        {
+            return _bookContext.Books.FirstOrDefault(x => x.Id == id);
+        }
+
+        public void Edit(BookEntity bookEntity)
+        {
+            var entity = _bookContext.Books.FirstOrDefault(x => x.Id == bookEntity.Id);
+            _bookContext.Books.Remove(entity);
+            _bookContext.Books.Add(bookEntity);
+        }
+
+        internal void Delete(int id)
+        {
+            var entity = _bookContext.Books.FirstOrDefault(x => x.Id == id);
+            _bookContext.Books.Remove(entity);
+        }
     }
 }
