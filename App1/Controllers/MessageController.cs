@@ -19,7 +19,7 @@ namespace App1.Controllers
         public IActionResult Index()
         {
             string message = _messageService.GetMessage();
-            return View("Index" , message);
+            return View("Index", message);
         }
     }
 }
