@@ -11,9 +11,9 @@ namespace App1.Controllers
     {
         private readonly MessageService _messageService;
 
-        public MessageController()
+        public MessageController(MessageService messageService)
         {
-            _messageService = new MessageService();
+            _messageService = messageService;
         }
 
         public IActionResult Index()
