@@ -1,0 +1,50 @@
+﻿@model UserViewModel
+@{
+    ViewData["Title"] = "Add";
+}
+
+<h1>Add</h1>
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    <div class="container">
+        <div class="row">
+            @Html.LabelFor(x => x.Id, null, new { @class = "col-md-2" })
+            @Html.TextBoxFor(x => x.Id, null, new { @class = "col-md-2", type = "number" })
+            @Html.ValidationMessageFor(x => x.Id, null, new { @class = "col-md-2" })
+        </div>
+        <div class="row">
+            @Html.LabelFor(x => x.Name, null, new { @class = "col-md-2" })
+            @Html.TextBoxFor(x => x.Name, null, new { @class = "col-md-2" })
+            @Html.ValidationMessageFor(x => x.Name, null, new { @class = "col-md-2" })
+        </div>
+        <div class="row">
+            @Html.LabelFor(x => x.Surname, null, new { @class = "col-md-2" })
+            @Html.TextBoxFor(x => x.Surname, null, new { @class = "col-md-2" })
+            @Html.ValidationMessageFor(x => x.Surname, null, new { @class = "col-md-2" })
+        </div>
+        <div class="row">
+            @Html.LabelFor(x => x.Email, null, new { @class = "col-md-2" })
+            @Html.TextBoxFor(x => x.Email, null, new { @class = "col-md-2" })
+            @Html.ValidationMessageFor(x => x.Email, null, new { @class = "col-md-2" })
+        </div>
+        <div class="row">
+            @Html.LabelFor(x => x.GithubAccountUrl, null, new { @class = "col-md-2" })
+            @Html.TextBoxFor(x => x.GithubAccountUrl, null, new { @class = "col-md-2" })
+            @Html.ValidationMessageFor(x => x.GithubAccountUrl, null, new { @class = "col-md-2" })
+        </div>
+        <div class="row">
+            @Html.LabelFor(x => x.Gender, null, new { @class = "col-md-2" })
+            @Html.DropDownListFor(x => x.Gender, Model.GenderSelectList, new { @class = "col-md-2" })
+            @Html.ValidationMessageFor(x => x.Gender, null, new { @class = "col-md-2" })
+        </div>
+        <div class="row">
+            @Html.LabelFor(x => x.BirthDate, null, new { @class = "col-md-2" })
+            @Html.TextBoxFor(x => x.BirthDate, "MM/dd/yyyy", new { @class = "col-md-2", type = "date" })
+            @Html.ValidationMessageFor(x => x.BirthDate, null, new { @class = "col-md-2" })
+        </div>
+        <div class="row">
+            <button type="submit">Kaydet</button>
+        </div>
+    </div>
+}
