@@ -34,6 +34,8 @@ namespace App1.Controllers
             instanceStatuses.Add("ScopedService", areInstancesSame);
 
             ViewBag.InstanceStatuses = instanceStatuses;
+            ViewBag.Message = "Hello";
+            ViewData["Message2"] = "Hello World! - ViewData";
             return View();
         }
     }

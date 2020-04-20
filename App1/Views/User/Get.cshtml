@@ -1,0 +1,59 @@
+﻿@model UserViewModel
+@{
+    ViewData["Title"] = "Get";
+}
+
+<h1>Get</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            @Html.DisplayNameFor(x => x.Id)
+        </div>
+        <div class="col-md-2">
+            @Html.DisplayFor(x => x.Id)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            @Html.DisplayNameFor(x => x.Name)
+        </div>
+        <div class="col-md-2">
+            @Html.DisplayFor(x => x.Name)
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-2">
+            @Html.DisplayNameFor(x => x.Surname)
+        </div>
+
+        <div class="col-md-2">
+            @Html.DisplayFor(x => x.Surname)
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-2">
+            @Html.DisplayNameFor(x => x.Email)
+        </div>
+
+        <div class="col-md-2">
+            @Html.DisplayFor(x => x.Email)
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-2">
+            @Html.DisplayNameFor(x => x.GithubAccountUrl)
+        </div>
+
+        <div class="col-md-2">
+            @Html.DisplayFor(x => x.GithubAccountUrl)
+        </div>
+    </div>
+</div>
