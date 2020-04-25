@@ -44,5 +44,11 @@ namespace App1.Services
             _context.Users.Remove(entityToUpdate);
             _context.Users.Add(entity);
         }
+
+        internal void Delete(int id)
+        {
+            var user = _context.Users.FirstOrDefault(x => x.Id == id);
+            _context.Users.Remove(user);
+        }
     }
 }

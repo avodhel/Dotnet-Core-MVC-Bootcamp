@@ -66,7 +66,7 @@ namespace App1
                 endpoints.MapControllerRoute(
                     name: "default",
                     //uygulamamýzýn default hangi controller ve hangi actiondan açýlacaðý burada belirleniyor
-                    pattern: "{controller=Book}/{action=Index}/{id?}");
+                    pattern: "{controller=User}/{action=IndexJs}/{id?}");
             });
         }
     }

@@ -1,0 +1,128 @@
+﻿@model List<UserViewModel>
+@{
+    ViewData["Title"] = "IndexJs";
+}
+
+<h1>IndexJs</h1>
+
+
+<div class="container">
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-info"><p>@TempData["Message"]</p></div>
+    }
+    <div class="row">
+        <div class="col-md-1"><h3>Sıra No</h3></div>
+        <div class="col-md-2"><h3>Adı</h3></div>
+        <div class="col-md-2"><h3>Soyadı</h3></div>
+        <div class="col-md-2"><h3>Eposta</h3></div>
+        <div class="col-md-5"><input id="newUser" type="button" class="btn btn-primary" value="Yeni Kullanıcı" data-toggle="modal" data-target="#modalTarget" /></div>
+    </div>
+    @foreach (var user in Model)
+    {
+        <div id="record-@user.Id" class="row">
+            <div class="col-md-1"><p>@user.Id </p></div>
+            <div class="col-md-2"><p>@user.Name </p></div>
+            <div class="col-md-2"><p>@user.Surname </p></div>
+            <div class="col-md-2"><p>@user.Email</p></div>
+            <div class="col-md-5">
+                <input id="detail-@user.Id" type="button" class="btn btn-info" value="Detay" data-toggle="modal" data-target="#modalTarget" />
+                <input id="delete-@user.Id" type="button" class="btn btn-danger" value="Sil" data-toggle="modal" data-target="#modalTarget" />
+            </div>
+        </div>
+    }
+</div>
+
+<div id="modalTarget" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="modalTitle" class="modal-title">Kullanıcı Detay</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="modalBody" class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("[id^=detail-]").click(function () {
+            var userId = $(this).attr("id").split("-")[1];
+            $.ajax({
+                url: '/User/GetAsJson?id=' + userId,
+                dataType: 'json',
+                success: function (data) {
+                    var modalBody =
+                        `<div class="container">
+                            <div class="row">
+                                <label class="col-md-4"><strong>Sıra No</strong></label>
+                                <label class="col-md-2">`+ data.id + `</label>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-md-4"><strong>İsim</strong></label>
+                                <label class="col-md-2">`+ data.name + `</label>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-md-4"><strong>Soy İsim</strong></label>
+                                <label class="col-md-2">`+ data.surname + `</label>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-md-4"><strong>Cinsiyet</strong></label>
+                                <label class="col-md-2">`+ data.gender + `</label>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-md-4"><strong>Github Adresi</strong></label>
+                                <label class="col-md-2">`+ data.githubAccountUrl + `</label>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-md-4"><strong>Email</strong></label>
+                                <label class="col-md-2">`+ data.email + `</label>
+                            </div>
+                        </div>`;
+                    $("#modalTitle").html("Kullanıcı Detay")
+                    $("#modalBody").html(modalBody);
+
+                }
+            });
+        });
+
+        $("[id^=delete-]").click(function () {
+            var userId = $(this).attr("id").split("-")[1];
+            $.ajax({
+                url: '/User/Delete?id=' + userId,
+                type: 'DELETE',
+                success: function (data) {
+                    $("#modalTitle").html("Kullanıcı Silme")
+                    $("#modalBody").html(data);
+                    var selectorKey = "#record-" + userId;
+                    $(selectorKey).remove();
+                }
+            });
+        });
+
+        $("#newUser").click(function () {
+            console.log("new user clicked.")
+            $.ajax({
+                url: '/User/NewUserPartial',
+                dataType: 'html',
+                success: function (data) {
+                    $("#modalTitle").html("Yeni Kullanıcı")
+                    $("#modalBody").html(data);
+                }
+            });
+        });
+    });
+</script>

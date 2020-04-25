@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using App1.Entities;
 using App1.Models;
 using App1.Services;
-//using DevTrends.MvcDonutCaching;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace App1.Controllers
 {
-    [Route("[controller]/[action]")]
+    //[Route("[controller]/[action]")]
     public class UserController : Controller
     {
         private readonly UserService _service;
@@ -20,6 +16,25 @@ namespace App1.Controllers
             _service = service;
         }
         public IActionResult Index()
+        {
+            List<UserViewModel> models = new List<UserViewModel>();
+            var users = _service.GetAll();
+            foreach (var user in users)
+            {
+                models.Add(new UserViewModel
+                {
+                    Id = user.Id,
+                    Name = user.Name,
+                    Surname = user.Surname,
+                    BirthDate = user.BirthDate,
+                    Email = user.Email,
+                    Gender = user.Gender,
+                    GithubAccountUrl = user.GithubAccountUrl
+                });
+            }
+            return View(models);
+        }
+        public IActionResult IndexJs()
         {
             List<UserViewModel> models = new List<UserViewModel>();
             var users = _service.GetAll();
@@ -190,5 +205,45 @@ namespace App1.Controllers
             }
             return View("Index", models);
         }
+
+        public IActionResult NewUserPartial()
+        {
+            var model = new UserViewModel();
+            SelectListItem[] genderList = new SelectListItem[]
+            {
+                new SelectListItem(){ Text="Seçiniz"},
+                new SelectListItem(){Text="Kadın", Value="Female"},
+                new SelectListItem(){Text="Erkek",Value="Male"}
+            };
+            ViewBag.GenderList = genderList;
+            return PartialView(model);
+        }
+
+
+        [HttpPost]
+        public IActionResult SaveUser(UserViewModel model)
+        {
+            UserEntity entity = new UserEntity
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Surname = model.Surname,
+                BirthDate = model.BirthDate,
+                Email = model.Email,
+                GithubAccountUrl = model.GithubAccountUrl,
+                Gender = model.Gender
+            };
+            _service.Add(entity);
+
+            return Ok();//Http Ok - HttpStatus 200
+        }
+
+        [HttpDelete]
+        public string Delete(int id)
+        {
+            _service.Delete(id);
+            return "Silme başarılı";
+        }
+
     }
 }

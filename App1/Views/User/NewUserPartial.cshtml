@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewData["Title"] = "NewUserPartial";
+}
+
+<div class="container">
+    <div class="row">
+        @Html.Label("Id", "Sıra No", new { @class = "col-md-4" })
+        @Html.TextBox("Id", null, new { @class = "col-md-8", type = "number", id = "id" })
+    </div>
+    <div class="row">
+        @Html.Label("Name", "İsim", new { @class = "col-md-4" })
+        @Html.TextBox("Name", null, new { @class = "col-md-8", id = "name" })
+    </div>
+    <div class="row">
+        @Html.Label("Surname", "Soyadı", new { @class = "col-md-4" })
+        @Html.TextBox("Surname", null, new { @class = "col-md-8", id = "surname" })
+    </div>
+    <div class="row">
+        @Html.Label("Email", "Email", new { @class = "col-md-4" })
+        @Html.TextBox("Email", null, new { @class = "col-md-8", id = "email" })
+    </div>
+    <div class="row">
+        @Html.Label("GithubUrl", "Github Hesabı", new { @class = "col-md-4" })
+        @Html.TextBox("GithubUrl", null, new { @class = "col-md-8", id = "githubUrl" })
+    </div>
+    <div class="row">
+        @Html.Label("Gender", "Cinsiyet", new { @class = "col-md-4" })
+        @Html.DropDownList("Gender", (SelectListItem[])ViewBag.GenderList, new { @class = "col-md-8", id = "gender" })
+    </div>
+    <div class="row">
+        @Html.Label("BirthDate", "Doğum Tarihi", new { @class = "col-md-4" })
+        @Html.TextBox("BirthDate", "MM/dd/yyyy", new { @class = "col-md-8", type = "date", id = "birthDate" })
+    </div>
+    <div class="row">
+        <button id="saveUser" type="button" class="btn btn-primary">Kaydet</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#saveUser").click(function () {
+            $.ajax({
+                url: '/User/SaveUser',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    "Id": $("#id").val(),
+                    "Name": $("#name").val(),
+                    "Surname": $("#surname").val(),
+                    "Email": $("#email").val(),
+                    "GithubAccountUrl": $("#githubUrl").val(),
+                    "Gender": $("#gender").val(),
+                    "BirthDate": $("#birthDate").val()
+                },
+                statusCode: {
+                    200: function () {
+                        $("#modalTitle").html("Yeni Kullanıcı")
+                        $("#modalBody").html("<strong>Kullanıcı başarı ile eklendi.</strong>")
+                    }
+                }
+            });
+        });
+    });
+</script>
