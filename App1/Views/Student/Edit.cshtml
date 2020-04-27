@@ -1,0 +1,35 @@
+﻿@model StudentViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+
+<div class="container">
+    <div class="row">
+        @Html.Label("Id", "Sıra No", new { @class = "col-md-4" })
+        @Html.Label("Id", Model.Id.ToString(), new { @class = "col-md-8" })
+        @Html.Hidden("Id", Model.Id, new { id = "id" })
+    </div>
+    <div class="row">
+        @Html.Label("Name", "İsim", new { @class = "col-md-4" })
+        @Html.TextBox("Name", Model.Name, new { @class = "col-md-8", id = "name" })
+    </div>
+    <div class="row">
+        @Html.Label("Surname", "Soyadı", new { @class = "col-md-4" })
+        @Html.TextBox("Surname", Model.Surname, new { @class = "col-md-8", id = "surname" })
+    </div>
+    <div class="row">
+        @Html.Label("Class", "Sınıf", new { @class = "col-md-4" })
+        @Html.TextBox("Class", Model.Class, new { @class = "col-md-8", id = "class" })
+    </div>
+    <div class="row">
+        @Html.Label("Teacher", "Sınıf Öğretmeni", new { @class = "col-md-4" })
+        @Html.TextBox("Teacher", Model.Teacher, new { @class = "col-md-8", id = "teacher" })
+    </div>
+    <div class="row">
+        <button id="saveStudents" type="button" class="btn btn-primary">Kaydet</button>
+    </div>
+</div>
+<script src="~/js/Students/students.js"></script>

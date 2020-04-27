@@ -1,0 +1,23 @@
+﻿@model List<StudentViewModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"><strong>No</strong></div>
+        <div class="col-md-2"><strong>Adı</strong></div>
+        <div class="col-md-2"><strong>Soyadı</strong></div>
+    </div>
+    @foreach (var student in Model)
+    {
+        <div class="row">
+            <div class="col-md-2">@student.Id</div>
+            <div class="col-md-2">@student.Name</div>
+            <div class="col-md-2">@student.Surname</div>
+            <div class="col-md-2"><a class="btn btn-info" href="ogrenci/@student.Id">Düzenle</a></div>
+        </div>
+    }
+</div>

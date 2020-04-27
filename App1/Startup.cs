@@ -30,6 +30,7 @@ namespace App1
             //sadece bir tane service objesi.
             services.AddSingleton<BookContext>();
             services.AddSingleton<UserContext>();
+            services.AddSingleton<StudentContext>();
 
             //her connectte service objesi.
             services.AddScoped<MessageService>();
@@ -39,6 +40,7 @@ namespace App1
             services.AddTransient<BookService>();
             services.AddTransient<UserService>();
             services.AddTransient<TransientService>();
+            services.AddTransient<StudentService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,7 +68,7 @@ namespace App1
                 endpoints.MapControllerRoute(
                     name: "default",
                     //uygulamamýzýn default hangi controller ve hangi actiondan açýlacaðý burada belirleniyor
-                    pattern: "{controller=User}/{action=IndexJs}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

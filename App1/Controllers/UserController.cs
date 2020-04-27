@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace App1.Controllers
 {
-    //[Route("[controller]/[action]")]
+    [Route("[controller]/[action]")]
     public class UserController : Controller
     {
         private readonly UserService _service;
