@@ -1,9 +1,11 @@
-﻿@model List<UserViewModel>
+﻿@using Microsoft.AspNetCore.Http
+@model List<UserViewModel>
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Kullanıcılar</h1>
+<h1>Index</h1>
+<strong>Bu sayfayı ilk ziyaret edişiniz @Context.Session.GetString("PageTimeStamp")</strong>
 
 <div class="container">
     @if (TempData["Message"] != null)

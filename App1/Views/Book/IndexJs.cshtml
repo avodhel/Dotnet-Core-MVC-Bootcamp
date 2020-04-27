@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewData["Title"] = "IndexJs";
+}
+
+<h1>Kitaplar üzerinde javascript ve jquery kullanarak işlem yapma</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"> <h2>Sıra No</h2></div>
+        <div class="col-md-3"> <h2>Kitap Adı</h2></div>
+        <div class="col-md-3"> <h2>Yazar</h2></div>
+        <div class="col-md-3"> <h2>Yayın Evi</h2></div>
+    </div>
+    @foreach (var book in Model)
+    {
+        <div class="row">
+            <div class="col-md-2"> <p>@book.Id</p></div>
+            <div class="col-md-3"> <p>@book.Name</p></div>
+            <div class="col-md-3"> <p>@book.Author</p></div>
+            <div class="col-md-3"> <p>@book.Publisher</p></div>
+            <div class="col-md-1"> <input type="button" id="detail-@book.Id" value="Detay" class="btn btn-info" data-toggle="modal" data-target="#modalTarget" /></div>
+        </div>
+    }
+</div>
+
+<div id="modalTarget" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="modalTitle" class="modal-title">Kitap Detay</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="modalBody" class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("[id^=detail-]").click(function () {
+            var bookId = $(this).attr("id").split("-")[1];
+            $.ajax({
+                url: '/Book/GetAsJson?id=' + bookId,
+                dataType: 'json',
+                success: function (data) {
+                    var modalBody =
+                        `<div class="container">
+                            <div class="row">
+                                <label class="col-md-4"><strong>Sıra No</strong></label>
+                                <label class="col-md-2">`+ data.id + `</label>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-md-4"><strong>Kitap Adı</strong></label>
+                                <label class="col-md-2">`+ data.name + `</label>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-md-4"><strong>Yazar</strong></label>
+                                <label class="col-md-2">`+ data.author + `</label>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-md-4"><strong>Yayıncı</strong></label>
+                                <label class="col-md-2">`+ data.publisher + `</label>
+                            </div>
+                        </div>`;
+
+                    $("#modalBody").html(modalBody);
+                }
+            });
+        });
+    });
+</script>

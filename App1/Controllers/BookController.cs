@@ -37,6 +37,23 @@ namespace App1.Controllers
             return View(bookViewModelList);
         }
 
+        public IActionResult IndexJs()
+        {
+            var bookEntities = _bookService.GetBooks();
+            var bookViewModelList = new List<BookViewModel>();
+            foreach (var entity in bookEntities)
+            {
+                bookViewModelList.Add(new BookViewModel
+                {
+                    Author = entity.Author,
+                    Id = entity.Id,
+                    Name = entity.Name,
+                    Publisher = entity.Publisher
+                });
+            }
+            return View(bookViewModelList);
+        }
+
         public IActionResult Edit(int id)
         {
             var bookEntity = _bookService.Get(id);
@@ -48,6 +65,20 @@ namespace App1.Controllers
                 Publisher = bookEntity.Publisher
             };
             return View(model);
+        }
+
+
+        public IActionResult EditByName(string name)
+        {
+            var bookEntity = _bookService.Get(name);
+            var model = new BookViewModel
+            {
+                Id = bookEntity.Id,
+                Author = bookEntity.Author,
+                Name = bookEntity.Name,
+                Publisher = bookEntity.Publisher
+            };
+            return View("Edit", model);
         }
 
         [HttpPost]
@@ -76,6 +107,42 @@ namespace App1.Controllers
         {
             _bookService.Delete(id);
             return RedirectToAction(nameof(Index), "Book");
+        }
+
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(BookViewModel model)
+        {
+            if (ModelState.IsValid == false)//!ModelState.IsValid 
+            {
+                return View(model);
+            }
+            BookEntity entity = new BookEntity()
+            {
+                Id = model.Id,
+                Author = model.Author,
+                Name = model.Name,
+                Publisher = model.Publisher
+            };
+            _bookService.Add(entity);
+            return RedirectToAction(nameof(Index), "Book");
+        }
+
+        public IActionResult GetAsJson(int id)
+        {
+            var bookEntity = _bookService.Get(id);
+            var model = new BookViewModel
+            {
+                Id = bookEntity.Id,
+                Author = bookEntity.Author,
+                Name = bookEntity.Name,
+                Publisher = bookEntity.Publisher
+            };
+            return Json(model);
         }
     }
 }

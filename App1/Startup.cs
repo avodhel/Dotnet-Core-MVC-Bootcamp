@@ -27,6 +27,8 @@ namespace App1
         {
             services.AddControllersWithViews();
 
+            services.AddSession();
+
             //sadece bir tane service objesi.
             services.AddSingleton<BookContext>();
             services.AddSingleton<UserContext>();
@@ -59,12 +61,59 @@ namespace App1
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseSession();
+
             app.UseRouting();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "UserRoute",
+                    pattern: "kitap-listesi",
+                    defaults: new { controller = "Book", action = "IndexJs" });
+
+                endpoints.MapControllerRoute(
+                    name: "UserIndexMultipleRoute",
+                    pattern: "{parameter}",
+                    constraints: new { parameter = "kitaplistesi|kitaplar|kitaplarimiz" },
+                    defaults: new { controller = "Book", action = "IndexJs" });
+
+                endpoints.MapControllerRoute(
+                    name: "UserIndexMultipleRouteWithConstantUrl",
+                    pattern: "kitap/{parameter}",
+                    constraints: new { parameter = "tümü|liste" },
+                    defaults: new { controller = "Book", action = "IndexJs" });
+
+                endpoints.MapControllerRoute(
+                    name: "MessageGetFromRoute",
+                    pattern: "message/{*message}",
+                    defaults: new { controller = "Message", action = "Get" }
+                    );
+
+                endpoints.MapControllerRoute(
+                    name: "BookEditByNameRoute",
+                    pattern: "kitap/{*name}",
+                    defaults: new { controller = "Book", action = "EditByName" }
+                    );
+
+                endpoints.MapControllerRoute(
+                    name: "StudentIndexRoute",
+                    pattern: "ogrenciler",
+                    defaults: new { controller = "Student", action = "Index" }
+                    );
+
+                endpoints.MapControllerRoute(
+                    name: "EditStudentRoute",
+                    pattern: "ogrenci/{*id}",
+                    defaults: new { controller = "Student", action = "Edit" }
+                    );
+                endpoints.MapControllerRoute(
+                    name: "EditStudentPostRoute",
+                    pattern: "ogrenci-guncelle",
+                    defaults: new { controller = "Student", action = "Edit" }
+                    );
                 endpoints.MapControllerRoute(
                     name: "default",
                     //uygulamamýzýn default hangi controller ve hangi actiondan açýlacaðý burada belirleniyor

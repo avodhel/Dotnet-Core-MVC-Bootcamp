@@ -1,9 +1,9 @@
-﻿using App1.Context;
-using App1.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using App1.Context;
+using App1.Entities;
 
 namespace App1.Services
 {
@@ -37,6 +37,16 @@ namespace App1.Services
         {
             var entity = _bookContext.Books.FirstOrDefault(x => x.Id == id);
             _bookContext.Books.Remove(entity);
+        }
+
+        public void Add(BookEntity entity)
+        {
+            _bookContext.Books.Add(entity);
+        }
+
+        internal BookEntity Get(string name)
+        {
+            return _bookContext.Books.FirstOrDefault(x => x.Name == name);
         }
     }
 }

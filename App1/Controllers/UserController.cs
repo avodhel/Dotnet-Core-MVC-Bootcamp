@@ -2,8 +2,10 @@
 using App1.Entities;
 using App1.Models;
 using App1.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 
 namespace App1.Controllers
 {
@@ -32,11 +34,16 @@ namespace App1.Controllers
                     GithubAccountUrl = user.GithubAccountUrl
                 });
             }
+
             return View(models);
         }
         public IActionResult IndexJs()
         {
             List<UserViewModel> models = new List<UserViewModel>();
+            if (string.IsNullOrWhiteSpace(HttpContext.Session.GetString("PageTimeStamp")))
+            {
+                HttpContext.Session.SetString("PageTimeStamp", DateTime.Now.ToString());
+            }
             var users = _service.GetAll();
             foreach (var user in users)
             {
