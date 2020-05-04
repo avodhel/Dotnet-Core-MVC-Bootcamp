@@ -1,0 +1,37 @@
+﻿@model AuthorInsertViewModel
+@{
+    ViewData["Title"] = "Add";
+}
+
+@if (ViewBag.AffectedRowCount > 0)
+{
+    <div class="alert alert-success">
+        <p>Yazar bilgisi database'e kaydedildi.</p>
+    </div>
+}
+
+<h1>Add</h1>
+@using (Html.BeginForm(FormMethod.Post))
+{
+    <div class="container">
+        <div class="row">
+            @Html.Label(null, "Adı", new { @class = "col-md-3" })
+            @Html.TextBoxFor(x => x.Name, null, new { @class = "col-md-3" })
+        </div>
+        <div class="row">
+            @Html.Label(null, "Soyadı", new { @class = "col-md-3" })
+            @Html.TextBoxFor(x => x.Surname, null, new { @class = "col-md-3" })
+        </div>
+        <div class="row">
+            @Html.Label(null, "Doğum Tarihi", new { @class = "col-md-3" })
+            @Html.TextBoxFor(x => x.BirthDate, null, new { type = "date", @class = "col-md-3" })
+        </div>
+        <div class="row">
+            @Html.Label(null, "Ölüm Tarihi", new { @class = "col-md-3" })
+            @Html.TextBoxFor(x => x.DeathDate, null, new { type = "date", @class = "col-md-3" })
+        </div>
+        <div class="row">
+            <input type="submit" value="Kaydet" />
+        </div>
+    </div>
+}

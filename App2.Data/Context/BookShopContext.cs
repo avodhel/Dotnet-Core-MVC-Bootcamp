@@ -6,7 +6,7 @@ using System.Text;
 
 namespace App2.Data.Context
 {
-    public class BookContext : DbContext
+    public class BookShopContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

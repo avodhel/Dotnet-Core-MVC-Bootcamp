@@ -11,7 +11,7 @@ namespace App2.Data.Repositories
 {
     public class BookRepository : BaseRepository<Book>
     {
-        public BookRepository(BookContext context) : base(context)
+        public BookRepository(BookShopContext context) : base(context)
         {
         }
 

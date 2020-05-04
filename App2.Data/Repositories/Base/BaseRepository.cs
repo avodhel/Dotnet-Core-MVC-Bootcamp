@@ -8,8 +8,8 @@ namespace App2.Data.Repositories.Base
 {
     public abstract class BaseRepository<TEntity> : IRespository<TEntity> where TEntity : class
     {
-        internal readonly BookContext _context;
-        public BaseRepository(BookContext context)
+        internal readonly BookShopContext _context;
+        public BaseRepository(BookShopContext context)
         {
             _context = context;
         }
@@ -31,9 +31,10 @@ namespace App2.Data.Repositories.Base
             return _context.Find<TEntity>(id);
         }
 
-        public void Insert(TEntity entity)
+        public int Insert(TEntity entity)
         {
-            throw new NotImplementedException();
+            _context.Set<TEntity>().Add(entity);
+            return _context.SaveChanges();
         }
 
         public void Update(TEntity entity)

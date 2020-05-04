@@ -29,9 +29,12 @@ namespace App2
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<BookContext>();
+            services.AddDbContext<BookShopContext>();
             services.AddTransient<BookService>();
             services.AddTransient<BookRepository>();
+
+            services.AddTransient<AuthorService>();
+            services.AddTransient<AuthorRepository>();
 
             services.AddAutoMapper(typeof(Startup));
         }
