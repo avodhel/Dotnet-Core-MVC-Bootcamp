@@ -15,6 +15,13 @@ namespace App2.Data.Repositories
         {
         }
 
+        /* Lazy loading direkt get denildiğinde verileri çekerken 
+         * eager and explicit loading'de ihtiyacımız olduğunda çekeriz.*/
+
+        /// <summary>
+        /// arkada tek bir sql konutu çalışır
+        /// </summary>
+        /// <returns></returns>
         public List<Book> GetBooksWithEagerLoading()
         {
             //bana kitapları getir publisherları da dahil et
@@ -23,6 +30,10 @@ namespace App2.Data.Repositories
                 .ToList();
         }
 
+        /// <summary>
+        /// arkada birden fazla sql komutu çalışır
+        /// </summary>
+        /// <returns></returns>
         public List<Book> GetBooksWithExplicitLoading()
         {
             var books = GetAll();   //publisher propertyler null 

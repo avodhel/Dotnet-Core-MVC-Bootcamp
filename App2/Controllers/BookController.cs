@@ -17,23 +17,29 @@ namespace App2.Controllers
         }
         public IActionResult Index()
         {
-            var model = new List<BookViewModel>();
+            var bookListModel = new List<BookViewModel>();
             //databaseden dataları alacağız
-            //var bookEntities = _service.GetBooks();
-
+            var bookEntities = _service.GetBooks();
             //var bookEntities = _service.GetBooksWithEagerLoading();
-            var bookEntities = _service.GetBooksWithExplicitLoading();
+            //var bookEntities = _service.GetBooksWithExplicitLoading();
+
             foreach (var entity in bookEntities)
             {
-                model.Add(new BookViewModel
+                var bookModel = new BookViewModel
                 {
                     Id = entity.BookId,
-                    Author = entity.Author,
                     Name = entity.Name,
                     Publisher = entity.Publisher.Name
-                });
+                };
+
+                foreach (var item in entity.BookAuthors)
+                {
+                    bookModel.Author += item.Author.Name + " " + item.Author.Surname + " ,";
+                }
+                bookListModel.Add(bookModel);
             }
-            return View(model);
+
+            return View(bookListModel);
         }
     }
 }
