@@ -10,9 +10,11 @@ namespace App2.Data.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=XQW-BILGISAYAR\SQLEXPRESS;Database=BookDb;uid=sa;pwd=12345;Integrated security=true");
+            optionsBuilder.UseLazyLoadingProxies()
+                .UseSqlServer(@"Server=XQW-BILGISAYAR\SQLEXPRESS;Database=BookDb;uid=sa;pwd=12345;Integrated security=true");
             base.OnConfiguring(optionsBuilder);
         }
         public DbSet<Book> Books { get; set; }
+        public DbSet<Publisher> Publishers { get; set; }
     }
 }

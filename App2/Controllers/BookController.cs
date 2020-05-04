@@ -27,7 +27,7 @@ namespace App2.Controllers
                     Id = entity.BookId,
                     Author = entity.Author,
                     Name = entity.Name,
-                    Publisher = entity.Publisher
+                    Publisher = entity.Publisher.Name
                 });
             }
             return View(model);
