@@ -8,7 +8,7 @@ namespace App2.Data.Repositories.Base
 {
     public abstract class BaseRepository<TEntity> : IRespository<TEntity> where TEntity : class
     {
-        private readonly BookContext _context;
+        internal readonly BookContext _context;
         public BaseRepository(BookContext context)
         {
             _context = context;

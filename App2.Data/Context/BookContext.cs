@@ -10,7 +10,8 @@ namespace App2.Data.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseLazyLoadingProxies()
+            optionsBuilder
+                //.UseLazyLoadingProxies()
                 .UseSqlServer(@"Server=XQW-BILGISAYAR\SQLEXPRESS;Database=BookDb;uid=sa;pwd=12345;Integrated security=true");
             base.OnConfiguring(optionsBuilder);
         }

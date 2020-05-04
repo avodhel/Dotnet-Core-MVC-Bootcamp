@@ -19,7 +19,10 @@ namespace App2.Controllers
         {
             var model = new List<BookViewModel>();
             //databaseden dataları alacağız
-            var bookEntities = _service.GetBooks();
+            //var bookEntities = _service.GetBooks();
+
+            //var bookEntities = _service.GetBooksWithEagerLoading();
+            var bookEntities = _service.GetBooksWithExplicitLoading();
             foreach (var entity in bookEntities)
             {
                 model.Add(new BookViewModel

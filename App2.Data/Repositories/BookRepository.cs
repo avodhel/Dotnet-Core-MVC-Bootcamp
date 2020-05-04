@@ -1,8 +1,10 @@
 ﻿using App2.Data.Context;
 using App2.Data.Entities;
 using App2.Data.Repositories.Base;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace App2.Data.Repositories
@@ -13,6 +15,25 @@ namespace App2.Data.Repositories
         {
         }
 
-        //yeni methodlar 
+        public List<Book> GetBooksWithEagerLoading()
+        {
+            //bana kitapları getir publisherları da dahil et
+            return _context.Books
+                .Include(x => x.Publisher)
+                .ToList();
+        }
+
+        public List<Book> GetBooksWithExplicitLoading()
+        {
+            var books = GetAll();   //publisher propertyler null 
+            foreach (var book in books)
+            {
+                _context.Entry(book)
+                    .Reference(x => x.Publisher)
+                    .Load();
+            }
+
+            return books.ToList();
+        }
     }
 }
