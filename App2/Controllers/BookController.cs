@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using App2.Models;
 using App2.Service;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App2.Controllers
@@ -11,9 +12,11 @@ namespace App2.Controllers
     public class BookController : Controller
     {
         private readonly BookService _service;
-        public BookController(BookService service)
+        private readonly IMapper _mapper;
+        public BookController(BookService service, IMapper mapper)
         {
             _service = service;
+            _mapper = mapper;
         }
         public IActionResult Index()
         {
@@ -25,17 +28,19 @@ namespace App2.Controllers
 
             foreach (var entity in bookEntities)
             {
-                var bookModel = new BookViewModel
-                {
-                    Id = entity.BookId,
-                    Name = entity.Name,
-                    Publisher = entity.Publisher.Name
-                };
+                //var bookModel = new BookViewModel
+                //{
+                //    Id = entity.BookId,
+                //    Name = entity.Name,
+                //    Publisher = entity.Publisher.Name
+                //};
 
-                foreach (var item in entity.BookAuthors)
-                {
-                    bookModel.Author += item.Author.Name + " " + item.Author.Surname + " ,";
-                }
+                var bookModel = _mapper.Map<BookViewModel>(entity);
+
+                //foreach (var item in entity.BookAuthors)
+                //{
+                //    bookModel.Author += item.Author.Name + " " + item.Author.Surname + " ,";
+                //}
                 bookListModel.Add(bookModel);
             }
 

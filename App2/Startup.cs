@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using App2.Data.Context;
 using App2.Data.Repositories;
 using App2.Service;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,6 +32,8 @@ namespace App2
             services.AddDbContext<BookContext>();
             services.AddTransient<BookService>();
             services.AddTransient<BookRepository>();
+
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
