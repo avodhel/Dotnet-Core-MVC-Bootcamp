@@ -1,0 +1,29 @@
+﻿@model PublisherUpdateViewModel
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h1>Update</h1>
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    <div class="container">
+        @Html.HiddenFor(x => x.Id)
+        <div class="col-md-6">
+            @Html.LabelFor(x => x.Name)
+        </div>
+        <div class="col-md-6">
+            @Html.TextBoxFor(x => x.Name)
+        </div>
+
+        <div class="col-md-6">
+            @Html.LabelFor(x => x.Address)
+        </div>
+        <div class="col-md-6">
+            @Html.TextBoxFor(x => x.Address)
+        </div>
+        <div class="col-md-6">
+            <input type="submit" class="btn btn-primary" value="Güncelle" />
+        </div>
+    </div>
+}

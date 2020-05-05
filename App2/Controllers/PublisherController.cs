@@ -36,5 +36,20 @@ namespace App2.Controllers
             _service.Insert(entity);
             return View(model);
         }
+
+        public IActionResult Update(int id)
+        {
+            var entity = _service.GetById(id);
+            var model = _mapper.Map<PublisherUpdateViewModel>(entity);
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Update(PublisherUpdateViewModel model)
+        {
+            var entity = _mapper.Map<Publisher>(model);
+            _service.Update(entity);
+            return View(model);
+        }
     }
 }
