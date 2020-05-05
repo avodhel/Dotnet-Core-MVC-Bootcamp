@@ -24,11 +24,12 @@
         </div>
         <div class="row">
             @Html.Label(null, "Doğum Tarihi", new { @class = "col-md-3" })
-            @Html.TextBoxFor(x => x.BirthDate, Model.BirthDate.ToString("dd/MM/yyyy"), new { type = "date", @class = "col-md-3", @value = Model.BirthDate })
+            @Html.TextBoxFor(x => x.BirthDate, "{0:yyyy-MM-dd}", new { type = "date", @class = "col-md-3" })
+
         </div>
         <div class="row">
             @Html.Label(null, "Ölüm Tarihi", new { @class = "col-md-3" })
-            @Html.TextBoxFor(x => x.DeathDate, "dd/MM/yyyy", new { type = "date", @class = "col-md-3", @value = Model.DeathDate })
+            @Html.TextBoxFor(x => x.DeathDate, "{0:yyyy-MM-dd}", new { type = "date", @class = "col-md-3" })
         </div>
         <div class="row">
             <input type="submit" value="Güncelle" />
