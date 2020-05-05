@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using App2.Models;
-using App2.Service;
+using App2.Service.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 

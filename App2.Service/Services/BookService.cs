@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace App2.Service
+namespace App2.Service.Services
 {
     public class BookService
     {

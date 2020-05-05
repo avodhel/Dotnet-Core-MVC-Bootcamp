@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using App2.Data.Entities;
 using App2.Models;
-using App2.Service;
+using App2.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App2.Controllers

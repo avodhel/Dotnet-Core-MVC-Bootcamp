@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using App2.Data.Context;
 using App2.Data.Repositories;
-using App2.Service;
+using App2.Service.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,6 +37,9 @@ namespace App2
 
             services.AddTransient<AuthorService>();
             services.AddTransient<AuthorRepository>();
+
+            services.AddTransient<PublisherService>();
+            services.AddTransient<PublisherRepository>();
 
             services.AddAutoMapper(typeof(Startup));
         }

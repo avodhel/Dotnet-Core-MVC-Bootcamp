@@ -1,0 +1,28 @@
+﻿@model PublisherInsertViewModel
+@{
+    ViewData["Title"] = "Insert";
+}
+
+<h1>Insert</h1>
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    <div class="container">
+        <div class="col-md-6">
+            @Html.LabelFor(x => x.Name)
+        </div>
+        <div class="col-md-6">
+            @Html.TextBoxFor(x => x.Name)
+        </div>
+
+        <div class="col-md-6">
+            @Html.LabelFor(x => x.Address)
+        </div>
+        <div class="col-md-6">
+            @Html.TextBoxFor(x => x.Address)
+        </div>
+        <div class="col-md-6">
+            <input type="submit" class="btn btn-primary" value="Kaydet" />
+        </div>
+    </div>
+}
