@@ -1,4 +1,5 @@
 ﻿using App2.Data.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,9 +38,10 @@ namespace App2.Data.Repositories.Base
             return _context.SaveChanges();
         }
 
-        public void Update(TEntity entity)
+        public int Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            _context.Entry(entity).State = EntityState.Modified;
+            return _context.SaveChanges();
         }
     }
 }

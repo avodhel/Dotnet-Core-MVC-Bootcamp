@@ -9,7 +9,7 @@ namespace App2.Data.Repositories.Base
         IEnumerable<TEntity> GetAll();
         TEntity GetById(int id);
         int Insert(TEntity entity);
-        void Update(TEntity entity);
+        int Update(TEntity entity);
         void Delete(int id);
     }
 }

@@ -29,6 +29,8 @@ namespace App2
         {
             services.AddControllersWithViews();
 
+            services.AddRazorPages().AddRazorRuntimeCompilation();
+
             services.AddDbContext<BookShopContext>();
             services.AddTransient<BookService>();
             services.AddTransient<BookRepository>();

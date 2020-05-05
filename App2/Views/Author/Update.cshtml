@@ -1,0 +1,37 @@
+﻿@model AuthorUpdateViewModel
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h1>Update</h1>
+
+@if (Convert.ToInt32(ViewData["UpdateAffectedRowCount"]) > 0)
+{
+    <div class="alert alert-success"><p>Güncelleme başarılı.</p></div>
+}
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    <div class="container">
+        @Html.HiddenFor(x => x.AuthorId)
+        <div class="row">
+            @Html.Label(null, "Adı", new { @class = "col-md-3" })
+            @Html.TextBoxFor(x => x.Name, null, new { @class = "col-md-3" })
+        </div>
+        <div class="row">
+            @Html.Label(null, "Soyadı", new { @class = "col-md-3" })
+            @Html.TextBoxFor(x => x.Surname, null, new { @class = "col-md-3" })
+        </div>
+        <div class="row">
+            @Html.Label(null, "Doğum Tarihi", new { @class = "col-md-3" })
+            @Html.TextBoxFor(x => x.BirthDate, Model.BirthDate.ToString("dd/MM/yyyy"), new { type = "date", @class = "col-md-3", @value = Model.BirthDate })
+        </div>
+        <div class="row">
+            @Html.Label(null, "Ölüm Tarihi", new { @class = "col-md-3" })
+            @Html.TextBoxFor(x => x.DeathDate, "dd/MM/yyyy", new { type = "date", @class = "col-md-3", @value = Model.DeathDate })
+        </div>
+        <div class="row">
+            <input type="submit" value="Güncelle" />
+        </div>
+    </div>
+}

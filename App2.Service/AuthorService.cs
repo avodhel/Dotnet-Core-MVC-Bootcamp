@@ -14,9 +14,19 @@ namespace App2.Service
             _repository = repository;
         }
 
+        public Author GetById(int id)
+        {
+            return _repository.GetById(id);
+        }
+
         public int Add(Author author)
         {
             return _repository.Insert(author);
+        }
+
+        public int Update(Author author)
+        {
+            return _repository.Update(author);
         }
     }
 }

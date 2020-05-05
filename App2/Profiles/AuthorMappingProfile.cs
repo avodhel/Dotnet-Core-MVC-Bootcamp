@@ -12,7 +12,11 @@ namespace App2.Profiles
     {
         public AuthorMappingProfile()
         {
+            //Add
             CreateMap<AuthorInsertViewModel, Author>();
+            //Update
+            CreateMap<Author, AuthorUpdateViewModel>();
+            CreateMap<AuthorUpdateViewModel, Author>();
         }
     }
 }
