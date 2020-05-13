@@ -1,0 +1,28 @@
+﻿@model BookAddViewModel
+@{
+    ViewData["Title"] = "Add";
+}
+
+<h1>Add</h1>
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    <div class="container">
+        <div class="row">
+            @Html.LabelFor(x => x.Name, "Kitap Adı", new { @class = "col-md-3" })
+            @Html.TextBoxFor(x => x.Name, null, new { @class = "col-md-5" })
+        </div>
+        <div class="row">
+            @Html.LabelFor(x => x.AuthorIds, "Yazar", new { @class = "col-md-3" })
+            @Html.ListBoxFor(x => x.AuthorIds, Model.Authors, new { @class = "col-md-5" })
+        </div>
+        <div class="row">
+            @Html.LabelFor(x => x.PublisherId, "YayınEvi", new { @class = "col-md-3" })
+            @Html.DropDownListFor(x => x.PublisherId, Model.Publishers, null, new { @class = "col-md-5" })
+        </div>
+        <div class="row">
+            <input type="submit" value="Kaydet" />
+        </div>
+    </div>
+}
+

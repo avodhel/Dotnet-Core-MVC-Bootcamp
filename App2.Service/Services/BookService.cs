@@ -29,5 +29,15 @@ namespace App2.Service.Services
         {
             return _repository.GetBooksWithExplicitLoading();
         }
+
+        public void Add(Book book)
+        {
+            _repository.Insert(book);
+        }
+
+        public void Update(Book book)
+        {
+            _repository.Update(book);
+        }
     }
 }

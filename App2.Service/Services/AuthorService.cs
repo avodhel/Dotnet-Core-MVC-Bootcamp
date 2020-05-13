@@ -2,6 +2,7 @@
 using App2.Data.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace App2.Service.Services
@@ -12,6 +13,11 @@ namespace App2.Service.Services
         public AuthorService(AuthorRepository repository)
         {
             _repository = repository;
+        }
+
+        public List<Author> GetAll()
+        {
+            return _repository.GetAll().ToList();
         }
 
         public Author GetById(int id)

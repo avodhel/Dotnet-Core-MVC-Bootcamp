@@ -2,6 +2,7 @@
 using App2.Data.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace App2.Service.Services
@@ -12,6 +13,11 @@ namespace App2.Service.Services
         public PublisherService(PublisherRepository repository)
         {
             _repository = repository;
+        }
+
+        public List<Publisher> GetAll()
+        {
+            return _repository.GetAll().ToList();
         }
 
         public Publisher GetById(int id)

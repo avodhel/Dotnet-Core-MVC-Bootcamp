@@ -2,27 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using App2.Data.Entities;
 using App2.Models;
 using App2.Service.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace App2.Controllers
 {
     public class BookController : Controller
     {
-        private readonly BookService _service;
+        private readonly BookService _bookService;
+        private readonly PublisherService _publisherService;
+        private readonly AuthorService _authorService;
         private readonly IMapper _mapper;
-        public BookController(BookService service, IMapper mapper)
+        public BookController(BookService bookService, PublisherService publisherService, AuthorService authorService, IMapper mapper)
         {
-            _service = service;
+            _bookService = bookService;
+            _publisherService = publisherService;
+            _authorService = authorService;
             _mapper = mapper;
         }
         public IActionResult Index()
         {
             var bookListModel = new List<BookViewModel>();
             //databaseden dataları alacağız
-            var bookEntities = _service.GetBooks();
+            var bookEntities = _bookService.GetBooks();
             //var bookEntities = _service.GetBooksWithEagerLoading();
             //var bookEntities = _service.GetBooksWithExplicitLoading();
 
@@ -45,6 +51,52 @@ namespace App2.Controllers
             }
 
             return View(bookListModel);
+        }
+
+        public IActionResult Add()
+        {
+            var model = new BookAddViewModel();
+
+            model.Publishers = new List<SelectListItem>();
+            var publishers = _publisherService.GetAll();
+            foreach (var publisher in publishers)
+            {
+                model.Publishers.Add(new SelectListItem(publisher.Name, publisher.PublisherId.ToString()));
+            }
+
+            model.Authors = new List<SelectListItem>();
+            var authors = _authorService.GetAll();
+            foreach (var author in authors)
+            {
+                model.Authors.Add(new SelectListItem(author.Name, author.AuthorId.ToString()));
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Add(BookAddViewModel model)
+        {
+            var publisher = _publisherService.GetById(model.PublisherId);
+            var book = new Book()
+            {
+                Name = model.Name,
+                Publisher = publisher
+            };
+            _bookService.Add(book);
+
+            book.BookAuthors = new List<BookAuthor>();
+
+            foreach (var authorId in model.AuthorIds)
+            {
+                book.BookAuthors.Add(new BookAuthor()
+                {
+                    BookId = book.BookId,
+                    AuthorId = authorId
+                });
+            }
+            _bookService.Update(book);
+
+            return RedirectToAction("Index", "Book");
         }
     }
 }
