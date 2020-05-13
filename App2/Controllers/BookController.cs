@@ -98,5 +98,12 @@ namespace App2.Controllers
 
             return RedirectToAction("Index", "Book");
         }
+
+        public IActionResult Detail(int id)
+        {
+            var book = _bookService.GetById(id);
+            var model = _mapper.Map<BookDetailViewModel>(book);
+            return View(model);
+        }
     }
 }

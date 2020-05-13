@@ -39,5 +39,10 @@ namespace App2.Service.Services
         {
             _repository.Update(book);
         }
+
+        public Book GetById(int id)
+        {
+            return _repository.GetById(id);
+        }
     }
 }
