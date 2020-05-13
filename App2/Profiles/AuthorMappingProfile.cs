@@ -17,6 +17,20 @@ namespace App2.Profiles
             //Update
             CreateMap<Author, AuthorUpdateViewModel>();
             CreateMap<AuthorUpdateViewModel, Author>();
+            //Detail
+            CreateMap<Author, AuthorDetailViewModel>()
+                .ForMember(x => x.NameAndSurname, y => y.MapFrom(entity => entity.Name + " " + entity.Surname))
+                .ForMember(x => x.Books, y => y.MapFrom(entity => GetBooks(entity)));
+        }
+
+        public List<string> GetBooks(Author author)
+        {
+            var books = new List<string>();
+            foreach (var bookAuthor in author.BookAuthors)
+            {
+                books.Add(bookAuthor.Book.Name);
+            }
+            return books;
         }
     }
 }

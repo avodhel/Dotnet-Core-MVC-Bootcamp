@@ -1,0 +1,40 @@
+﻿@model AuthorDetailViewModel
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<h1>Detail</h1>
+
+<div class="container">
+
+    <div class="row">
+        @Html.LabelFor(x => x.AuthorId, "Yazar No", new { @class = "col-md-3" })
+        @Html.DisplayFor(x => x.AuthorId)
+    </div>
+    <div class="row">
+        @Html.LabelFor(x => x.NameAndSurname, "Adı Soyadı", new { @class = "col-md-3" })
+        @Html.DisplayFor(x => x.NameAndSurname)
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(x => x.BirthDate, "Doğum Tarihi", new { @class = "col-md-3" })
+        @Html.DisplayFor(x => x.BirthDate)
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(x => x.DeathDate, "Ölüm Tarihi", new { @class = "col-md-3" })
+        @Html.DisplayFor(x => x.DeathDate)
+    </div>
+    <div class="row">
+        @Html.LabelFor(x => x.Books, "Kitaplar", new { @class = "col-md-3" })
+        <div>
+            @foreach (var book in Model.Books)
+            {
+                <p>@book</p>
+            }
+        </div>
+    </div>
+</div>
+
+
+

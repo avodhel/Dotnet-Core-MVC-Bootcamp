@@ -54,5 +54,12 @@ namespace App2.Controllers
             ViewData["UpdateAffectedRowCount"] = affectedRowCount;
             return View(model);
         }
+
+        public IActionResult Detail(int id)
+        {
+            var author = _service.GetById(id);
+            var model = _mapper.Map<AuthorDetailViewModel>(author);
+            return View(model);
+        }
     }
 }
