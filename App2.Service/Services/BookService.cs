@@ -44,5 +44,10 @@ namespace App2.Service.Services
         {
             return _repository.GetById(id);
         }
+
+        public void Delete(int id)
+        {
+            _repository.Delete(id);
+        }
     }
 }

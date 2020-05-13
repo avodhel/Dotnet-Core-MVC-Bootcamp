@@ -105,5 +105,11 @@ namespace App2.Controllers
             var model = _mapper.Map<BookDetailViewModel>(book);
             return View(model);
         }
+
+        public IActionResult Delete(int id)
+        {
+            _bookService.Delete(id);
+            return RedirectToAction("Index", "Book");
+        }
     }
 }
