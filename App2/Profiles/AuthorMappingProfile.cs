@@ -21,6 +21,8 @@ namespace App2.Profiles
             CreateMap<Author, AuthorDetailViewModel>()
                 .ForMember(x => x.NameAndSurname, y => y.MapFrom(entity => entity.Name + " " + entity.Surname))
                 .ForMember(x => x.Books, y => y.MapFrom(entity => GetBooks(entity)));
+            //Author List
+            CreateMap<Author, AuthorIndexViewModel>();
         }
 
         public List<string> GetBooks(Author author)

@@ -22,7 +22,9 @@ namespace App2.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var authors = _service.GetAll();
+            var model = _mapper.Map<List<AuthorIndexViewModel>>(authors);
+            return View(model);
         }
 
         public IActionResult Add()

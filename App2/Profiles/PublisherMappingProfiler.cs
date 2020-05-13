@@ -14,14 +14,12 @@ namespace App2.Profiles
         {
             //Add
             CreateMap<PublisherInsertViewModel, Publisher>();
-
             //Update
             CreateMap<Publisher, PublisherUpdateViewModel>()
                 .ForMember(x => x.Id, y => y.MapFrom(z => z.PublisherId));
 
             CreateMap<PublisherUpdateViewModel, Publisher>()
                 .ForMember(x => x.PublisherId, y => y.MapFrom(z => z.Id));
-
             //Detail
             CreateMap<Publisher, PublisherDetailViewModel>()
                 .ForMember(x => x.Books, y => y.MapFrom(entity => GetBooks(entity.Books)));
