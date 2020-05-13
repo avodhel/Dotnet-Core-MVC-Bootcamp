@@ -10,7 +10,8 @@ namespace App2.Models
     {
         public int BookId { get; set; }
         public string Name { get; set; }
-        public string PublisherName { get; set; }
+        //public string PublisherName { get; set; }
+        public PublisherItem PublisherItem { get; set; }
         public List<AuthorItem> Authors { get; set; }
     }
 
@@ -18,5 +19,11 @@ namespace App2.Models
     {
         public int AuthorId { get; set; }
         public string NameAndSurname { get; set; }
+    }
+
+    public class PublisherItem
+    {
+        public int PublisherId { get; set; }
+        public string PublisherName { get; set; }
     }
 }

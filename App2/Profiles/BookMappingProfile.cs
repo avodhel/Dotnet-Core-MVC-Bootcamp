@@ -18,7 +18,8 @@ namespace App2.Profiles
                 .ForMember(bookVm => bookVm.Author, cfg => cfg.MapFrom((bookEntity) => getAuthors(bookEntity)));
 
             CreateMap<Book, BookDetailViewModel>()
-                .ForMember(x => x.PublisherName, y => y.MapFrom(entity => entity.Publisher.Name))
+                //.ForMember(x => x.PublisherName, y => y.MapFrom(entity => entity.Publisher.Name))
+                .ForMember(x => x.PublisherItem, y => y.MapFrom(entity => GetPublisherItem(entity.Publisher)))
                 .ForMember(x => x.Authors, y => y.MapFrom(entity => GetAuthorItems(entity)));
         }
 
@@ -46,6 +47,16 @@ namespace App2.Profiles
                 authorItems.Add(authorItem);
             }
             return authorItems;
+        }
+
+        private PublisherItem GetPublisherItem(Publisher publisher)
+        {
+            var publisherItem = new PublisherItem()
+            {
+                PublisherId = publisher.PublisherId,
+                PublisherName = publisher.Name
+            };
+            return publisherItem;
         }
     }
 }

@@ -25,10 +25,14 @@
             }
         </div>
     </div>
+    @*<div class="row">
+            @Html.LabelFor(x => x.PublisherName, "YayınEvi", new { @class = "col-md-3" })
+            @Html.DisplayFor(x => x.PublisherName)
+        </div>*@
+
     <div class="row">
-        @Html.LabelFor(x => x.PublisherName, "YayınEvi", new { @class = "col-md-3" })
-        @Html.DisplayFor(x => x.PublisherName)
+        @Html.LabelFor(x => x.PublisherItem, "YayınEvi", new { @class = "col-md-3" })
+        @Html.ActionLink(Model.PublisherItem.PublisherName, "Detail", "Publisher", new { id = Model.PublisherItem.PublisherId })
     </div>
 </div>
-
 

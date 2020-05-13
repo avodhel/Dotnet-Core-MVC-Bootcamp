@@ -12,7 +12,7 @@ namespace App2.Profiles
     {
         public PublisherMappingProfile()
         {
-            //Insert
+            //Add
             CreateMap<PublisherInsertViewModel, Publisher>();
 
             //Update
@@ -21,6 +21,20 @@ namespace App2.Profiles
 
             CreateMap<PublisherUpdateViewModel, Publisher>()
                 .ForMember(x => x.PublisherId, y => y.MapFrom(z => z.Id));
+
+            //Detail
+            CreateMap<Publisher, PublisherDetailViewModel>()
+                .ForMember(x => x.Books, y => y.MapFrom(entity => GetBooks(entity.Books)));
+        }
+
+        public List<string> GetBooks(ICollection<Book> books)
+        {
+            var bookList = new List<string>();
+            foreach (var book in books)
+            {
+                bookList.Add(book.Name);
+            }
+            return bookList;
         }
     }
 }

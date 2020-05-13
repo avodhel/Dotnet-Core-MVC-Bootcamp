@@ -51,5 +51,13 @@ namespace App2.Controllers
             _service.Update(entity);
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult Detail(int id)
+        {
+            var publisher = _service.GetById(id);
+            var model = _mapper.Map<PublisherDetailViewModel>(publisher);
+            return View(model);
+        }
     }
 }

@@ -1,0 +1,30 @@
+﻿@model PublisherDetailViewModel
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<h1>Detail</h1>
+
+<div class="container">
+    <div class="row">
+        @Html.LabelFor(x => x.PublisherId, null, new { @class = "col-md-3" })
+        @Html.DisplayFor(x => x.PublisherId)
+    </div>
+    <div class="row">
+        @Html.LabelFor(x => x.Name, null, new { @class = "col-md-3" })
+        @Html.DisplayFor(x => x.Name)
+    </div>
+    <div class="row">
+        @Html.LabelFor(x => x.Address, null, new { @class = "col-md-3" })
+        @Html.DisplayFor(x => x.Address)
+    </div>
+    <div class="row">
+        @Html.LabelFor(x => x.Books, null, new { @class = "col-md-3" })
+        <div>
+            @foreach (var book in Model.Books)
+            {
+                <p>@book</p>
+            }
+        </div>
+    </div>
+</div>

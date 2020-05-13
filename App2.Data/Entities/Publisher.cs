@@ -9,5 +9,6 @@ namespace App2.Data.Entities
         public int PublisherId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
+        public virtual ICollection<Book> Books { get; set; }
     }
 }

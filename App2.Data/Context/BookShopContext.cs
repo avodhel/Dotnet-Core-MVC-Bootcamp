@@ -36,6 +36,9 @@ namespace App2.Data.Context
                 .WithMany(a => a.BookAuthors)
                 .HasForeignKey(ba => ba.AuthorId);
 
+            modelBuilder.Entity<Book>()
+                .HasOne(x => x.Publisher);
+
             base.OnModelCreating(modelBuilder);
         }
 
