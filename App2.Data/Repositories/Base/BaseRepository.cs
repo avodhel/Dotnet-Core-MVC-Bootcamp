@@ -21,6 +21,13 @@ namespace App2.Data.Repositories.Base
             _context.SaveChanges();
         }
 
+        public void Delete(TEntity entity)
+        {
+            _context.Remove(entity);
+            _context.SaveChanges();
+        }
+
+
         public IEnumerable<TEntity> GetAll()
         {
             var entities = _context.Set<TEntity>().ToList();

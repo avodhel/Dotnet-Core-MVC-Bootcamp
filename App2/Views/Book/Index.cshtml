@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Kitaplar</h1>
 
 <p>
     <a asp-action="Add">Create New</a>
@@ -44,7 +44,7 @@
                     @Html.DisplayFor(modelItem => item.Publisher)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Düzenle", "Update", new { id = item.Id }) |
                     @Html.ActionLink("Detay", "Detail", new { id = item.Id }) |
                     @Html.ActionLink("Sil", "Delete", new { id = item.Id })
                 </td>

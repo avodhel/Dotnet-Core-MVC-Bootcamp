@@ -57,19 +57,9 @@ namespace App2.Controllers
         {
             var model = new BookAddViewModel();
 
-            model.Publishers = new List<SelectListItem>();
-            var publishers = _publisherService.GetAll();
-            foreach (var publisher in publishers)
-            {
-                model.Publishers.Add(new SelectListItem(publisher.Name, publisher.PublisherId.ToString()));
-            }
+            model.Publishers = GetPublisherSelectListItems();
+            model.Authors = GetAuthorSelectListItems();
 
-            model.Authors = new List<SelectListItem>();
-            var authors = _authorService.GetAll();
-            foreach (var author in authors)
-            {
-                model.Authors.Add(new SelectListItem(author.Name, author.AuthorId.ToString()));
-            }
             return View(model);
         }
 
@@ -111,5 +101,50 @@ namespace App2.Controllers
             _bookService.Delete(id);
             return RedirectToAction("Index", "Book");
         }
+
+        public IActionResult Update(int id)
+        {
+            var book = _bookService.GetById(id);
+            var model = _mapper.Map<BookUpdateViewModel>(book);
+            model.Authors = GetAuthorSelectListItems();
+            model.Publishers = GetPublisherSelectListItems();
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Update(BookUpdateViewModel model)
+        {
+            var bookEntity = _mapper.Map<Book>(model);
+            _bookService.RemoveRelationForAuthor(model.BookId);
+            _bookService.Update(bookEntity);
+            _bookService.AddRelationForAuthor(bookEntity.BookAuthors);
+            return RedirectToAction("Index", "Book");
+        }
+
+        #region Select List Items
+
+        private List<SelectListItem> GetPublisherSelectListItems()
+        {
+            var result = new List<SelectListItem>();
+            var publishers = _publisherService.GetAll();
+            foreach (var publisher in publishers)
+            {
+                result.Add(new SelectListItem(publisher.Name, publisher.PublisherId.ToString()));
+            }
+            return result;
+        }
+
+        private List<SelectListItem> GetAuthorSelectListItems()
+        {
+            var result = new List<SelectListItem>();
+            var authors = _authorService.GetAll();
+            foreach (var author in authors)
+            {
+                result.Add(new SelectListItem(author.Name, author.AuthorId.ToString()));
+            }
+            return result;
+        }
+
+        #endregion
     }
 }

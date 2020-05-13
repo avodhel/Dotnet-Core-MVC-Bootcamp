@@ -41,6 +41,8 @@ namespace App2
             services.AddTransient<PublisherService>();
             services.AddTransient<PublisherRepository>();
 
+            services.AddTransient<BookAuthorRepository>();
+
             services.AddAutoMapper(typeof(Startup));
         }
 
