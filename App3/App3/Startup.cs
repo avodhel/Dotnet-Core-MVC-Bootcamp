@@ -2,9 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using App3.Data.Context;
+using App3.Service.Services;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,6 +27,11 @@ namespace App3
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<AuthorService>();
+            services.AddDbContext<BlogDbContext>(opt => {
+                opt.UseSqlServer(Configuration.GetConnectionString("BlogDbContext"));
+            });
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();
         }
 
@@ -50,7 +59,7 @@ namespace App3
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Author}/{action=Index}/{id?}");
             });
         }
     }
