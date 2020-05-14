@@ -22,7 +22,9 @@ namespace App2.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var publishers = _publisherService.GetAll();
+            var model = _mapper.Map<List<PublisherIndexViewModel>>(publishers);
+            return View(model);
         }
 
         public IActionResult Insert()

@@ -23,6 +23,8 @@ namespace App2.Profiles
             //Detail
             CreateMap<Publisher, PublisherDetailViewModel>()
                 .ForMember(x => x.Books, y => y.MapFrom(entity => GetBooks(entity.Books)));
+            //Publisher List
+            CreateMap<Publisher, PublisherIndexViewModel>();
         }
 
         public List<string> GetBooks(ICollection<Book> books)
