@@ -39,8 +39,8 @@
                 </td>
                 <td>
                     @Html.ActionLink("Düzenle", "Update", new { id = item.AuthorId }) |
-                    @Html.ActionLink("Detay", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Sil", "Delete", new { /* id=item.PrimaryKey */ })
+                    @Html.ActionLink("Detay", "Detail", new { id = item.AuthorId }) |
+                    @Html.ActionLink("Sil", "Delete", new { id = item.AuthorId })
                 </td>
             </tr>
         }

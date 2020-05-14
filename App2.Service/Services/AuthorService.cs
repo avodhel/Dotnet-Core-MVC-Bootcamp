@@ -10,9 +10,12 @@ namespace App2.Service.Services
     public class AuthorService
     {
         private readonly AuthorRepository _repository;
-        public AuthorService(AuthorRepository repository)
+        private readonly BookAuthorRepository _bookAuthorRepository;
+
+        public AuthorService(AuthorRepository repository, BookAuthorRepository bookAuthorRepository)
         {
             _repository = repository;
+            _bookAuthorRepository = bookAuthorRepository;
         }
 
         public List<Author> GetAll()
@@ -33,6 +36,18 @@ namespace App2.Service.Services
         public int Update(Author author)
         {
             return _repository.Update(author);
+        }
+
+        public void Delete(int id)
+        {
+            _repository.Delete(id);
+            //get related books etc.
+            var relatedObjects = _bookAuthorRepository.GetAll().Where(x => x.AuthorId == id);
+            //delete related books etc.
+            foreach (var r in relatedObjects)
+            {
+                _bookAuthorRepository.Delete(r);
+            }
         }
     }
 }

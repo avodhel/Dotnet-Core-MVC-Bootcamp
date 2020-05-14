@@ -10,6 +10,7 @@ namespace App2.Service.Services
     public class PublisherService
     {
         private readonly PublisherRepository _repository;
+
         public PublisherService(PublisherRepository repository)
         {
             _repository = repository;

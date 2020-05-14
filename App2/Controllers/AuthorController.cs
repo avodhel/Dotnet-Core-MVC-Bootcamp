@@ -63,5 +63,11 @@ namespace App2.Controllers
             var model = _mapper.Map<AuthorDetailViewModel>(author);
             return View(model);
         }
+
+        public IActionResult Delete(int id)
+        {
+            _service.Delete(id);
+            return RedirectToAction("Index", "Author");
+        }
     }
 }

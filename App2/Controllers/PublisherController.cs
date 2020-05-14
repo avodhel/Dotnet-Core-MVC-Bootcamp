@@ -7,16 +7,17 @@ using AutoMapper;
 using App2.Data.Entities;
 using App2.Models;
 using App2.Service.Services;
+using App2.Data.Repositories;
 
 namespace App2.Controllers
 {
     public class PublisherController : Controller
     {
-        private readonly PublisherService _service;
+        private readonly PublisherService _publisherService;
         private readonly IMapper _mapper;
         public PublisherController(PublisherService service, IMapper mapper)
         {
-            _service = service;
+            _publisherService = service;
             _mapper = mapper;
         }
         public IActionResult Index()
@@ -33,13 +34,13 @@ namespace App2.Controllers
         public IActionResult Insert(PublisherInsertViewModel model)
         {
             var entity = _mapper.Map<Publisher>(model);
-            _service.Insert(entity);
+            _publisherService.Insert(entity);
             return View(model);
         }
 
         public IActionResult Update(int id)
         {
-            var entity = _service.GetById(id);
+            var entity = _publisherService.GetById(id);
             var model = _mapper.Map<PublisherUpdateViewModel>(entity);
             return View(model);
         }
@@ -48,14 +49,14 @@ namespace App2.Controllers
         public IActionResult Update(PublisherUpdateViewModel model)
         {
             var entity = _mapper.Map<Publisher>(model);
-            _service.Update(entity);
+            _publisherService.Update(entity);
             return View(model);
         }
 
         [HttpGet]
         public IActionResult Detail(int id)
         {
-            var publisher = _service.GetById(id);
+            var publisher = _publisherService.GetById(id);
             var model = _mapper.Map<PublisherDetailViewModel>(publisher);
             return View(model);
         }
