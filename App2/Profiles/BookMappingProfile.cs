@@ -61,6 +61,10 @@ namespace App2.Profiles
 
         private PublisherItem GetPublisherItem(Publisher publisher)
         {
+            if (publisher == null)
+            {
+                return null;
+            }
             var publisherItem = new PublisherItem()
             {
                 PublisherId = publisher.PublisherId,

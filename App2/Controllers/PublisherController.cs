@@ -62,5 +62,11 @@ namespace App2.Controllers
             var model = _mapper.Map<PublisherDetailViewModel>(publisher);
             return View(model);
         }
+
+        public IActionResult Delete(int id)
+        {
+            _publisherService.Delete(id);
+            return RedirectToAction("Index", "Publisher");
+        }
     }
 }

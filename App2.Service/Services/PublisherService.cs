@@ -9,31 +9,45 @@ namespace App2.Service.Services
 {
     public class PublisherService
     {
-        private readonly PublisherRepository _repository;
+        private readonly PublisherRepository _publisherRepository;
+        private readonly BookRepository _bookRepository;
 
-        public PublisherService(PublisherRepository repository)
+        public PublisherService(PublisherRepository repository, BookRepository bookRepository)
         {
-            _repository = repository;
+            _publisherRepository = repository;
+            _bookRepository = bookRepository;
         }
 
         public List<Publisher> GetAll()
         {
-            return _repository.GetAll().ToList();
+            return _publisherRepository.GetAll().ToList();
         }
 
         public Publisher GetById(int id)
         {
-            return _repository.GetById(id);
+            return _publisherRepository.GetById(id);
         }
 
         public int Insert(Publisher publisher)
         {
-            return _repository.Insert(publisher);
+            return _publisherRepository.Insert(publisher);
         }
 
         public int Update(Publisher publisher)
         {
-            return _repository.Update(publisher);
+            return _publisherRepository.Update(publisher);
+        }
+
+        public void Delete(int id)
+        {
+            //get related books and clear their publisher info
+            var relatedBooks = _bookRepository.GetAll().Where(x => x.PublisherId == id);
+            foreach (var rb in relatedBooks)
+            {
+                rb.PublisherId = null;
+                _bookRepository.Update(rb);
+            }
+            _publisherRepository.Delete(id);
         }
     }
 }

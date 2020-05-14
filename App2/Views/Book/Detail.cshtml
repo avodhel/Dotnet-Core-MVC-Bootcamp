@@ -30,9 +30,12 @@
             @Html.DisplayFor(x => x.PublisherName)
         </div>*@
 
-    <div class="row">
-        @Html.LabelFor(x => x.PublisherItem, "YayınEvi", new { @class = "col-md-3" })
+<div class="row">
+    @Html.LabelFor(x => x.PublisherItem, "YayınEvi", new { @class = "col-md-3" })
+    @if (Model.PublisherItem != null)
+    {
         @Html.ActionLink(Model.PublisherItem.PublisherName, "Detail", "Publisher", new { id = Model.PublisherItem.PublisherId })
-    </div>
+    }
+</div>
 </div>
 
