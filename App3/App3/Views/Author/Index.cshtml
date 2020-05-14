@@ -1,0 +1,23 @@
+﻿@model List<AuthorIndexViewModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"><strong>Yazar No</strong></div>
+        <div class="col-md-3"><strong>Yazar Adı</strong></div>
+        <div class="col-md-3"><strong>Yazar Soyadı</strong></div>
+    </div>
+
+    @foreach (var author in Model)
+    {
+        <div class="row">
+            <div class="col-md-2"><p>@author.Id</p></div>
+            <div class="col-md-3"><p>@author.Name</p></div>
+            <div class="col-md-3"><p>@author.Surname</p></div>
+        </div>
+    }
+</div>
