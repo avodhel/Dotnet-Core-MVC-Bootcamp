@@ -41,7 +41,8 @@ namespace App2.Service.Services
         public void Delete(int id)
         {
             //get related books and clear their publisher info
-            var relatedBooks = _bookRepository.GetAll().Where(x => x.PublisherId == id);
+            //var relatedBooks = _bookRepository.GetAll().Where(x => x.PublisherId == id);
+            var relatedBooks = _bookRepository.Query().Where(x => x.PublisherId == id).ToList();
             foreach (var rb in relatedBooks)
             {
                 rb.PublisherId = null;

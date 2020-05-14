@@ -50,5 +50,12 @@ namespace App2.Data.Repositories.Base
             _context.Entry(entity).State = EntityState.Modified;
             return _context.SaveChanges();
         }
+
+        //ilgili nesneye ait sorglanabilir bir tablo verir
+        //bu sayede bütün veriler için sorgu dönmektense, sql üzerinde sadece istenen veri için sorgu döner.
+        public IQueryable<TEntity> Query()
+        {
+            return _context.Set<TEntity>().AsQueryable().AsTracking();
+        }
     }
 }

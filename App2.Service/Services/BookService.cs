@@ -54,8 +54,10 @@ namespace App2.Service.Services
 
         public void RemoveRelationForAuthor(int bookId)
         {
-            var bookAuthors = _bookAuthorRepository.GetAll();
-            var relatedObjects = bookAuthors.Where(x => x.BookId == bookId);
+            //var bookAuthors = _bookAuthorRepository.GetAll();
+            //var relatedObjects = bookAuthors.Where(x => x.BookId == bookId);            
+            var bookAuthors = _bookAuthorRepository.Query();
+            var relatedObjects = bookAuthors.Where(x => x.BookId == bookId).ToList();
 
             foreach (var bookAuthor in relatedObjects)
             {
