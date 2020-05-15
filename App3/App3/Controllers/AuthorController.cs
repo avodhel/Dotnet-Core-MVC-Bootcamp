@@ -6,6 +6,7 @@ using AutoMapper;
 using App3.Service.Services;
 using App3.Models;
 using Microsoft.AspNetCore.Mvc;
+using App3.Service.Dto;
 
 namespace App3.Controllers
 {
@@ -30,6 +31,13 @@ namespace App3.Controllers
             var authors = _service.BlogCountQuery(blogCount);
             var model = _mapper.Map<List<AuthorIndexViewModel>>(authors);
             return View("Index", model);
+        }
+
+        public IActionResult Summary()
+        {
+            var summaryDto = _service.GetSummary();
+            var model = _mapper.Map<List<AuthorBlogSummaryViewModel>>(summaryDto);
+            return View(model);
         }
     }
 }

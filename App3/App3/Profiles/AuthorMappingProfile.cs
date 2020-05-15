@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using App3.Models;
+using App3.Service.Dto;
 
 namespace App3.Profiles
 {
@@ -13,6 +14,7 @@ namespace App3.Profiles
         public AuthorMappingProfile()
         {
             CreateMap<Author, AuthorIndexViewModel>();
+            CreateMap<AuthorBlogSummaryDto, AuthorBlogSummaryViewModel>();
         }
     }
 }

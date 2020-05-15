@@ -1,0 +1,26 @@
+﻿@model List<AuthorBlogSummaryViewModel>
+@{
+    ViewData["Title"] = "Summary";
+}
+
+<h1>Özet</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"><strong>Blog Id</strong></div>
+        <div class="col-md-3"><strong>Yazar</strong></div>
+        <div class="col-md-3"><strong>Başlık</strong></div>
+        <div class="col-md-3"><strong>Tarih</strong></div>
+    </div>
+
+    @foreach (var summary in Model)
+    {
+        <div class="row">
+            <div class="col-md-2"><p>@summary.BlogId</p></div>
+            <div class="col-md-3"><p>@summary.AuthorNameSurname</p></div>
+            <div class="col-md-3"><p>@summary.BlogTitle</p></div>
+            <div class="col-md-3"><p>@summary.CreateDate</p></div>
+        </div>
+    }
+</div>
+

@@ -1,5 +1,6 @@
 ﻿using App3.Data.Context;
 using App3.Data.Entities;
+using App3.Service.Dto;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -38,6 +39,26 @@ namespace App3.Service.Services
                                                 .ToList();
 
             return _context.Author.Where(author => authorIds.Contains(author.Id)).ToList();
+        }
+
+        /// <summary>
+        /// author ve blog tablolarını birleştir ve istenen alanları çek
+        /// </summary>
+        /// <returns></returns>
+        public List<AuthorBlogSummaryDto> GetSummary()
+        {
+            var result = _context.Author.Join(_context.Blog,
+                                              author => author.Id,
+                                              blog => blog.AuthorId,
+                                              (author, blog) => new AuthorBlogSummaryDto
+                                              {
+                                                  BlogId = blog.Id,
+                                                  AuthorNameSurname = author.Name + " " + author.Surname,
+                                                  BlogTitle = blog.Title,
+                                                  CreateDate = blog.CreateDate
+                                              }).ToList();
+
+            return result;
         }
     }
 }
