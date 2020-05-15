@@ -18,7 +18,9 @@
             <div class="col-md-2"><p>@author.Id</p></div>
             <div class="col-md-3"><p>@author.Name</p></div>
             <div class="col-md-3"><p>@author.Surname</p></div>
-            <div class="col-md-3"><p>@Html.ActionLink("Güncelle", "Update", new { id = author.Id })</p></div>
+            <div class="col-md-1"><p>@Html.ActionLink("Detay", "Detail", new { id = author.Id })</p></div>
+            <div class="col-md-1"><p>@Html.ActionLink("Güncelle", "Update", new { id = author.Id })</p></div>
+            <div class="col-md-1"><p>@Html.ActionLink("Sil", "Delete", new { id = author.Id })</p></div>
         </div>
     }
 </div>

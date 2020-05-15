@@ -31,6 +31,22 @@ namespace App3.Service.Services
             _context.SaveChanges();
         }
 
+        public void Delete(int id)
+        {
+            //clear relations before delete author
+            var blogs = _context.Blog.Where(blog => blog.AuthorId == id);
+            foreach (var b in blogs)
+            {
+                b.AuthorId = null;
+                _context.Blog.Update(b);
+            }
+            _context.SaveChanges();
+            //delete author
+            var entity = _context.Author.FirstOrDefault(x => x.Id == id);
+            _context.Remove(entity);
+            _context.SaveChanges();
+        }
+
         /// <summary>
         /// bütün yazarlar için belli bir sayıda yazısı olanları dön
         /// </summary>

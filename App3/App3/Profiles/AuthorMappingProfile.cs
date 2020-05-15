@@ -16,8 +16,8 @@ namespace App3.Profiles
             //Author List
             CreateMap<Author, AuthorIndexViewModel>();
             //Update
-            CreateMap<Author, AuthorUpdateViewModel>();
-            CreateMap<AuthorUpdateViewModel, Author>();
+            CreateMap<Author, AuthorViewModel>();
+            CreateMap<AuthorViewModel, Author>();
             //Summary
             CreateMap<AuthorBlogSummaryDto, AuthorBlogSummaryViewModel>();
         }

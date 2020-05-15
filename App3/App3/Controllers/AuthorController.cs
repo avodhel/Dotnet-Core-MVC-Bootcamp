@@ -44,16 +44,29 @@ namespace App3.Controllers
         public IActionResult Update(int id)
         {
             var author = _service.GetById(id);
-            var model = _mapper.Map<AuthorUpdateViewModel>(author);
+            var model = _mapper.Map<AuthorViewModel>(author);
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Update(AuthorUpdateViewModel model)
+        public IActionResult Update(AuthorViewModel model)
         {
             var entity = _mapper.Map<Author>(model);
             _service.Update(entity);
             return RedirectToAction("Index", "Author");
+        }
+
+        public IActionResult Delete(int id)
+        {
+            _service.Delete(id);
+            return RedirectToAction(nameof(Index), "Author");
+        }
+
+        public IActionResult Detail(int id)
+        {
+            var author = _service.GetById(id);
+            var model = _mapper.Map<AuthorViewModel>(author);
+            return View(model);
         }
     }
 }

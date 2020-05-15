@@ -14,6 +14,6 @@ namespace App3.Data.Entities
         public DateTime CreateDate { get; set; }
         public int LikeCount { get; set; }
         public int DislikeCount { get; set; }
-        public int AuthorId { get; set; }
+        public int? AuthorId { get; set; }
     }
 }
