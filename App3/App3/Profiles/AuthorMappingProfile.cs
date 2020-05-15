@@ -13,7 +13,12 @@ namespace App3.Profiles
     {
         public AuthorMappingProfile()
         {
+            //Author List
             CreateMap<Author, AuthorIndexViewModel>();
+            //Update
+            CreateMap<Author, AuthorUpdateViewModel>();
+            CreateMap<AuthorUpdateViewModel, Author>();
+            //Summary
             CreateMap<AuthorBlogSummaryDto, AuthorBlogSummaryViewModel>();
         }
     }

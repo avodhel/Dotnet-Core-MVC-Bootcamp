@@ -7,6 +7,7 @@ using App3.Service.Services;
 using App3.Models;
 using Microsoft.AspNetCore.Mvc;
 using App3.Service.Dto;
+using App3.Data.Entities;
 
 namespace App3.Controllers
 {
@@ -38,6 +39,21 @@ namespace App3.Controllers
             var summaryDto = _service.GetSummary();
             var model = _mapper.Map<List<AuthorBlogSummaryViewModel>>(summaryDto);
             return View(model);
+        }
+
+        public IActionResult Update(int id)
+        {
+            var author = _service.GetById(id);
+            var model = _mapper.Map<AuthorUpdateViewModel>(author);
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Update(AuthorUpdateViewModel model)
+        {
+            var entity = _mapper.Map<Author>(model);
+            _service.Update(entity);
+            return RedirectToAction("Index", "Author");
         }
     }
 }

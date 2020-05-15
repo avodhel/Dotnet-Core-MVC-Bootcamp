@@ -1,0 +1,32 @@
+﻿@model AuthorUpdateViewModel
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h1>Yazar Güncelle</h1>
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    <div class="container">
+        <div class="row form-group">
+            @Html.Label(null, "Yazar No", new { @class = "col-md-3" })
+            @Html.HiddenFor(x => x.Id)
+            @Html.DisplayFor(x => x.Id)
+        </div>
+        <div class="row form-group">
+            @Html.Label(null, "Yazar Adı", new { @class = "col-md-3" })
+            @Html.TextBoxFor(x => x.Name, null, new { @class = "col-md-5 form-control" })
+        </div>
+        <div class="row form-group">
+            @Html.Label(null, "Yazar Soyadı", new { @class = "col-md-3" })
+            @Html.TextBoxFor(x => x.Surname, new { @class = "col-md-5 form-control" })
+        </div>
+        <div class="row form-group">
+            @Html.Label(null, "Kısa Özgeçmiş", new { @class = "col-md-3" })
+            @Html.TextAreaFor(x => x.ShortBio, 10, 10, new { @class = "col-md-5 form-control" })
+        </div>
+        <div class="row form-group">
+            <input type="submit" value="Güncelle" class="btn-primary" />
+        </div>
+    </div>
+}

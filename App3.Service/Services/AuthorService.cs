@@ -1,6 +1,7 @@
 ﻿using App3.Data.Context;
 using App3.Data.Entities;
 using App3.Service.Dto;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,8 +15,20 @@ namespace App3.Service.Services
             _context = context;
         }
 
-        public List<Author> GetAll() {
+        public Author GetById(int id)
+        {
+            return _context.Author.FirstOrDefault(author => author.Id == id);
+        }
+
+        public List<Author> GetAll() 
+        {
             return _context.Author.ToList();
+        }
+
+        public void Update(Author entityToBeUpdate)
+        {
+            _context.Author.Update(entityToBeUpdate);
+            _context.SaveChanges();
         }
 
         /// <summary>
