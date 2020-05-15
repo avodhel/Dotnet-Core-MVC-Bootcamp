@@ -24,5 +24,12 @@ namespace App3.Controllers
             var model = _mapper.Map<List<AuthorIndexViewModel>>(authors);
             return View(model);
         }
+
+        public IActionResult Query(int blogCount)
+        {
+            var authors = _service.BlogCountQuery(blogCount);
+            var model = _mapper.Map<List<AuthorIndexViewModel>>(authors);
+            return View("Index", model);
+        }
     }
 }
