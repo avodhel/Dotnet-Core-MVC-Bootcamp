@@ -3,27 +3,53 @@
     ViewData["Title"] = "Index";
 }
 
+    <style>
+        .article
+        {
+            border:1px solid #037bff;
+            margin-bottom:10px;
+            padding-bottom:10px;
+        }
+        .bottom-border {
+            border-bottom: 1px dashed #037bff;
+        }
+        .row
+        {
+            padding-left:10px;
+        }
+        .badge
+        {
+            margin-right:5px;
+        }
+        .title
+        {
+            padding-top:10px;
+            background-color:#cceeff;
+        }
+    </style>
+
 <h1>Blog</h1>
+
 <div class="container">
     @foreach (var blog in Model)
     {
-        <div class="container">
+        <div class="article container">
             @*Title*@
-            <div class="row">
+            <div class="row bottom-border title">
                 @Html.ActionLink(blog.Title, "Detail") <p> - </p> @Html.ActionLink(blog.Author.NameAndSurname, "Detail", "Author", new { id = blog.Author.Id })
             </div>
             <div class="row">
                 <p>@blog.Content.Substring(0, 250)...</p>
             </div>
             <div class="row">
-                <div>
+                <div class="col-md-2">
                     @foreach (var tag in blog.Tags)
                     {
                         @Html.ActionLink(tag.Name, "#", "#", new { id = tag.Id }, new { @class = "badge badge-primary" })
                     }
                 </div>
-                <div><span>@blog.CreateDate tarihinde oluşturuldu.</span></div>
-                <div>
+                <div class="col-md-8"><span>@blog.CreateDate tarihinde oluşturuldu.</span></div>
+                <div class="col-md-2">
                     <span>like : @blog.LikeCount</span>
                     <span>dislike : @blog.DislikeCount</span>
                 </div>
