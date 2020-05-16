@@ -15,6 +15,7 @@ namespace App3.Profiles
             CreateMap<BlogDto, BlogViewModel>();
                 //.ForMember(x => x.Author, y => y.MapFrom(z => z.Author))
                 //.ForMember(x => x.Tags, y => y.MapFrom(z => z.Tags));
+            CreateMap<BlogPaginationDto, BlogPaginationViewModel>();
         }
     }
 }

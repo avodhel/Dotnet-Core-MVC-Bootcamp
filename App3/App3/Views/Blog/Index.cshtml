@@ -1,37 +1,34 @@
-﻿@model List<BlogViewModel>
+﻿@model BlogPaginationViewModel
 @{
     ViewData["Title"] = "Index";
 }
+<style>
+    .article {
+        border: 1px solid #037bff;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+    }
 
-    <style>
-        .article
-        {
-            border:1px solid #037bff;
-            margin-bottom:10px;
-            padding-bottom:10px;
-        }
-        .bottom-border {
-            border-bottom: 1px dashed #037bff;
-        }
-        .row
-        {
-            padding-left:10px;
-        }
-        .badge
-        {
-            margin-right:5px;
-        }
-        .title
-        {
-            padding-top:10px;
-            background-color:#cceeff;
-        }
-    </style>
+    .bottom-border {
+        border-bottom: 1px dashed #037bff
+    }
 
+    .row {
+        padding-left: 10px;
+    }
+
+    .badge {
+        margin-right: 5px;
+    }
+
+    .title {
+        padding-top: 10px;
+        background-color: #cceeff;
+    }
+</style>
 <h1>Blog</h1>
-
 <div class="container">
-    @foreach (var blog in Model)
+    @foreach (var blog in Model.Blogs)
     {
         <div class="article container">
             @*Title*@
@@ -48,7 +45,7 @@
                         @Html.ActionLink(tag.Name, "Index", "Blog", new { tagId = tag.Id }, new { @class = "badge badge-primary" })
                     }
                 </div>
-                <div class="col-md-8"><span>@blog.CreateDate tarihinde oluşturuldu.</span></div>
+                <div class="col-md-8"><span>@blog.CreateDate.ToShortDateString() tarihinde oluşturuldu.</span></div>
                 <div class="col-md-2">
                     <span>like : @blog.LikeCount</span>
                     <span>dislike : @blog.DislikeCount</span>
@@ -56,4 +53,11 @@
             </div>
         </div>
     }
+
+    <div class="row">
+        @for (int i = 1; i <= Model.BlogPageCount; i++)
+        {
+            @Html.ActionLink(i.ToString(), "Index", "Blog", new { pageId = i, tagId = Model.TagId }, new { @class = "badge badge-light" })
+        }
+    </div>
 </div>

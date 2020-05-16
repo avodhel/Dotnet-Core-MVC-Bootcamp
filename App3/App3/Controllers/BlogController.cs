@@ -20,18 +20,24 @@ namespace App3.Controllers
             _mapper = mapper;
         }
 
-        public IActionResult Index(int tagId)
+        public IActionResult Index(int tagId, int pageId = 1)
         {
-            List<BlogDto> blogs = new List<BlogDto>();
+            var blogs = new BlogPaginationDto();
             if (tagId > 0)
             {
-                blogs = _service.GetByTagId(tagId);
+                blogs = _service.GetByTagId(tagId, pageId);
             }
             else
             {
-                blogs = _service.GetBlogs();
+                blogs = _service.GetBlogs(pageId);
             }
-            var models = _mapper.Map<List<BlogViewModel>>(blogs);
+
+            var models = _mapper.Map<BlogPaginationViewModel>(blogs);
+            if (tagId > 0)
+            {
+                models.TagId = tagId;
+            }
+
             return View(models);
         }
 
