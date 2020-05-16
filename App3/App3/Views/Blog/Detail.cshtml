@@ -2,10 +2,31 @@
 @{
     ViewData["Title"] = "Detail";
 }
+<style>
+    .authorDetail {
+        width: 85%;
+    }
 
+    .reactionDetail {
+        width: 15%;
+    }
+
+    .header {
+        height: 60px;
+        border: 1px solid #cceeff;
+        padding-top: 15px;
+        padding-left: 10px;
+    }
+</style>
 <h1>@Model.Title</h1>
 
 <div class="container">
+    <div class="row header">
+        <div class="authorDetail">
+            <span>@Model.Author.NameAndSurname tarafından @Model.CreateDate.ToShortDateString() tarihinde oluşturuldu.</span>
+        </div>
+        <div class="reactionDetail"><span>like : @Model.LikeCount, dislike : @Model.DislikeCount</span></div>
+    </div>
     <div class="row">
         <span>@Model.Content</span>
     </div>
