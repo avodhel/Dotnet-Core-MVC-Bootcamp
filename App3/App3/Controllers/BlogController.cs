@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using App3.Models;
+using App3.Service.Dto;
 using App3.Service.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -19,9 +20,17 @@ namespace App3.Controllers
             _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int tagId)
         {
-            var blogs = _service.GetBlogs();
+            List<BlogDto> blogs = new List<BlogDto>();
+            if (tagId > 0)
+            {
+                blogs = _service.GetByTagId(tagId);
+            }
+            else
+            {
+                blogs = _service.GetBlogs();
+            }
             var models = _mapper.Map<List<BlogViewModel>>(blogs);
             return View(models);
         }

@@ -80,7 +80,59 @@ namespace App3.Service.Services
                                         })
                                        .FirstOrDefault();
 
+            var tags = GetTags(result.Id);
+            result.Tags = tags;
             return result;
+        }
+
+        public List<BlogDto> GetByTagId(int tagId)
+        {
+            var result = _context.Blog.Join(_context.Author,
+                                            blog => blog.AuthorId,
+                                            author => author.Id,
+                                            (blog, author) => new { blog, author })
+                                      .Join(_context.BlogTag,
+                                            query => query.blog.Id,
+                                            blogTag => blogTag.BlogId,
+                                            (query, blogTag) => new { query.blog, query.author, blogTag.TagId })
+                                      .Where(x => x.TagId == tagId)
+                                      .Select(result => new BlogDto
+                                        {
+                                            Id = result.blog.Id,
+                                            Title = result.blog.Title,
+                                            Content = result.blog.Content,
+                                            CreateDate = result.blog.CreateDate,
+                                            DislikeCount = result.blog.DislikeCount,
+                                            LikeCount = result.blog.LikeCount,
+                                            Author = new AuthorInfoDto
+                                            {
+                                                Id = result.author.Id,
+                                                NameAndSurname = $"{result.author.Name} {result.author.Surname}",
+                                            }
+                                        })
+                                      .ToList();
+
+            foreach (var blog in result)
+            {
+                blog.Tags = GetTags(blog.Id);
+            }
+
+            return result;
+        }
+
+        private List<TagDto> GetTags(int blogId)
+        {
+            return _context.Tag.Join(_context.BlogTag,
+                                     tag => tag.Id,
+                                     blogTag => blogTag.TagId,
+                                     (tag, blogtag) => new { tag, blogtag.BlogId })
+                                .Where(query => query.BlogId == blogId)
+                                .Select(result => new TagDto
+                                {
+                                    Id = result.tag.Id,
+                                    Name = result.tag.Name
+                                })
+                                .ToList();
         }
     }
 }

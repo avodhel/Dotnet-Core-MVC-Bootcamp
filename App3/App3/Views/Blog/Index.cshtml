@@ -45,7 +45,7 @@
                 <div class="col-md-2">
                     @foreach (var tag in blog.Tags)
                     {
-                        @Html.ActionLink(tag.Name, "#", "#", new { id = tag.Id }, new { @class = "badge badge-primary" })
+                        @Html.ActionLink(tag.Name, "Index", "Blog", new { tagId = tag.Id }, new { @class = "badge badge-primary" })
                     }
                 </div>
                 <div class="col-md-8"><span>@blog.CreateDate tarihinde oluşturuldu.</span></div>
