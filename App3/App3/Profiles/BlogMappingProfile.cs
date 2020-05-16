@@ -12,7 +12,7 @@ namespace App3.Profiles
     {
         public BlogMappingProfile()
         {
-            CreateMap<BlogDto, BlogIndexViewModel>();
+            CreateMap<BlogDto, BlogViewModel>();
                 //.ForMember(x => x.Author, y => y.MapFrom(z => z.Author))
                 //.ForMember(x => x.Tags, y => y.MapFrom(z => z.Tags));
         }

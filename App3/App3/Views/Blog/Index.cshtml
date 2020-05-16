@@ -1,4 +1,4 @@
-﻿@model List<BlogIndexViewModel>
+﻿@model List<BlogViewModel>
 @{
     ViewData["Title"] = "Index";
 }
@@ -36,7 +36,7 @@
         <div class="article container">
             @*Title*@
             <div class="row bottom-border title">
-                @Html.ActionLink(blog.Title, "Detail") <p> - </p> @Html.ActionLink(blog.Author.NameAndSurname, "Detail", "Author", new { id = blog.Author.Id })
+                @Html.ActionLink(blog.Title, "Detail", "Blog", new { id = blog.Id }) <p> - </p> @Html.ActionLink(blog.Author.NameAndSurname, "Detail", "Author", new { id = blog.Author.Id })
             </div>
             <div class="row">
                 <p>@blog.Content.Substring(0, 250)...</p>

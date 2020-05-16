@@ -56,5 +56,31 @@ namespace App3.Service.Services
 
             return result;
         }
+
+        public BlogDto GetById(int id)
+        {
+            var result = _context.Blog.Join(_context.Author,
+                                            blog => blog.AuthorId,
+                                            author => author.Id,
+                                            (blog, author) => new { blog, author })
+                                       .Where(x => x.blog.Id == id)
+                                       .Select(result => new BlogDto
+                                        {
+                                            Id = result.blog.Id,
+                                            Title = result.blog.Title,
+                                            Content = result.blog.Content,
+                                            CreateDate = result.blog.CreateDate,
+                                            DislikeCount = result.blog.DislikeCount,
+                                            LikeCount = result.blog.LikeCount,
+                                            Author = new AuthorInfoDto
+                                            {
+                                                Id = result.author.Id,
+                                                NameAndSurname = $"{result.author.Name} {result.author.Surname}",
+                                            }
+                                        })
+                                       .FirstOrDefault();
+
+            return result;
+        }
     }
 }

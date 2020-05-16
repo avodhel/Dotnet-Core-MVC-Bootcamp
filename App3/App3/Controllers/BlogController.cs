@@ -22,8 +22,16 @@ namespace App3.Controllers
         public IActionResult Index()
         {
             var blogs = _service.GetBlogs();
-            var models = _mapper.Map<List<BlogIndexViewModel>>(blogs);
+            var models = _mapper.Map<List<BlogViewModel>>(blogs);
             return View(models);
+        }
+
+        public IActionResult Detail(int id)
+        {
+            var blog = _service.GetById(id);
+            var model = _mapper.Map<BlogViewModel>(blog);
+
+            return View(model);
         }
     }
 }
