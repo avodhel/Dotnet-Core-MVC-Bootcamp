@@ -28,6 +28,7 @@ namespace App3
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<AuthorService>();
+            services.AddTransient<BlogService>();
             services.AddDbContext<BlogDbContext>(opt => {
                 opt.UseSqlServer(Configuration.GetConnectionString("BlogDbContext"));
             });
@@ -59,7 +60,7 @@ namespace App3
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Author}/{action=Index}/{id?}");
+                    pattern: "{controller=Blog}/{action=Index}/{id?}");
             });
         }
     }

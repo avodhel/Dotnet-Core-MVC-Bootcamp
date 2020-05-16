@@ -1,0 +1,33 @@
+﻿@model List<BlogIndexViewModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Blog</h1>
+<div class="container">
+    @foreach (var blog in Model)
+    {
+        <div class="container">
+            @*Title*@
+            <div class="row">
+                @Html.ActionLink(blog.Title, "Detail") <p> - </p> @Html.ActionLink(blog.Author.NameAndSurname, "Detail", "Author", new { id = blog.Author.Id })
+            </div>
+            <div class="row">
+                <p>@blog.Content.Substring(0, 250)...</p>
+            </div>
+            <div class="row">
+                <div>
+                    @foreach (var tag in blog.Tags)
+                    {
+                        @Html.ActionLink(tag.Name, "#", "#", new { id = tag.Id }, new { @class = "badge badge-primary" })
+                    }
+                </div>
+                <div><span>@blog.CreateDate tarihinde oluşturuldu.</span></div>
+                <div>
+                    <span>like : @blog.LikeCount</span>
+                    <span>dislike : @blog.DislikeCount</span>
+                </div>
+            </div>
+        </div>
+    }
+</div>
