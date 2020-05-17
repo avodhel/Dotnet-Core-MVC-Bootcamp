@@ -48,5 +48,17 @@ namespace App3.Controllers
 
             return View(model);
         }
+
+        public JsonResult Like(int id)
+        {
+            var likeCount = _service.Like(id);
+            return Json(likeCount);
+        }
+
+        public JsonResult Dislike(int id)
+        {
+            var dislikeCount = _service.Dislike(id);
+            return Json(dislikeCount);
+        }
     }
 }

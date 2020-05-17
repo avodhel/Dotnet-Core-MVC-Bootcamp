@@ -17,6 +17,39 @@
         padding-top: 15px;
         padding-left: 10px;
     }
+
+    .imgReaction {
+        width: 30px;
+        height: 30px;
+    }
+
+    .reactionDetail span {
+        margin-right: 15px;
+    }
+
+    .tagRow {
+        margin-top: 10px;
+    }
+
+    .tag {
+        border: 3px solid #cceeff;
+        border-radius: 10px 10px;
+        padding: 5px;
+        margin: 5px;
+    }
+
+        .tag:hover {
+            background-color: #cceeff;
+            border-color: #3399ff
+        }
+
+    .reactionDetail div {
+        transition: width 2s, height 2s, transform 2s;
+    }
+
+        .reactionDetail div:hover {
+            transform: rotate(360deg);
+        }
 </style>
 <h1>@Model.Title</h1>
 
@@ -25,9 +58,27 @@
         <div class="authorDetail">
             <span>@Model.Author.NameAndSurname tarafından @Model.CreateDate.ToShortDateString() tarihinde oluşturuldu.</span>
         </div>
-        <div class="reactionDetail"><span>like : @Model.LikeCount, dislike : @Model.DislikeCount</span></div>
+        <div class="row reactionDetail">
+            @*<span>like : @Model.LikeCount, dislike : @Model.DislikeCount</span>*@
+            <input type="hidden" id="blogId" value="@Model.Id" />
+
+            <div id="like"><img class="imgReaction" src="~/img/like.png" /></div><span id="likeCount">@Model.LikeCount</span>
+
+            <div id="dislike"><img class="imgReaction" src="~/img/dislike.png" /></div><span id="dislikeCount">@Model.DislikeCount</span>
+        </div>
     </div>
     <div class="row">
         <span>@Model.Content</span>
     </div>
+    <div class="row tagRow">
+        <span>İlgili tagler</span>
+        <div>
+            @foreach (var tag in Model.Tags)
+            {
+                @Html.ActionLink(tag.Name, "Index", "BlogId", new { tagId = tag.Id }, new { @class = "tag" })
+            }
+        </div>
+    </div>
 </div>
+<script src="~/js/Blog/Detail.js"></script>
+<script src="~/js/Utils/cookie.js"></script>

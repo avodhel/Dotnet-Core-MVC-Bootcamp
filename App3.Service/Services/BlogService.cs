@@ -157,5 +157,22 @@ namespace App3.Service.Services
             }
             return pageCount;
         }
+
+        public int Like(int id)
+        {
+            var blog = _context.Blog.FirstOrDefault(x => x.Id == id);
+            blog.LikeCount++;
+            _context.Blog.Update(blog);
+            _context.SaveChanges();
+            return blog.LikeCount;
+        }
+        public int Dislike(int id)
+        {
+            var blog = _context.Blog.FirstOrDefault(x => x.Id == id);
+            blog.DislikeCount++;
+            _context.Blog.Update(blog);
+            _context.SaveChanges();
+            return blog.DislikeCount;
+        }
     }
 }
