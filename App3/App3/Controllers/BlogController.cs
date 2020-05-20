@@ -22,6 +22,7 @@ namespace App3.Controllers
         }
 
         [ExceptionLogFilter]
+        [ServiceFilter(typeof(CustomResultFilter))]
         public IActionResult Index(int tagId, int pageId = 1)
         {
             if (tagId < 0)
