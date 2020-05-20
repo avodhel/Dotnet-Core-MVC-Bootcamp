@@ -52,9 +52,9 @@ namespace App3.Controllers
             return View(models);
         }
 
-        [ServiceFilter(typeof(CustomActionFilter))]
-        [ServiceFilter(typeof(CustomHeaderActionFilter))]
-        [ServiceFilter(typeof(ViewDataActionFilter))]
+        [ServiceFilter(typeof(CustomActionFilter), Order = 3)]
+        [ServiceFilter(typeof(CustomHeaderActionFilter), Order = 2)]
+        [ServiceFilter(typeof(ViewDataActionFilter), Order = 1)]
         public IActionResult Detail(int id)
         {
             var blog = _service.GetById(id);
