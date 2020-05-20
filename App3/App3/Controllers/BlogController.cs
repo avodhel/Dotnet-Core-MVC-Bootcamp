@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using App3.Filters;
 using App3.Models;
 using App3.Service.Dto;
 using App3.Service.Services;
@@ -20,8 +21,18 @@ namespace App3.Controllers
             _mapper = mapper;
         }
 
+        [ExceptionLogFilter]
         public IActionResult Index(int tagId, int pageId = 1)
         {
+            if (tagId < 0)
+            {
+                throw new Exception($"tagId 0'dan küçük olamaz. Şuan ki değer : {tagId}");
+            }
+            if (pageId < 1)
+            {
+                throw new Exception($"pageId 1'den küçük olamaz. Şuan ki değer : {pageId}");
+            }
+
             var blogs = new BlogPaginationDto();
             if (tagId > 0)
             {

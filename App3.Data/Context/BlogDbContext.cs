@@ -22,6 +22,7 @@ namespace App3.Data.Context
         public DbSet<Author> Author { get; set; }
         public DbSet<Tag> Tag { get; set; }
         public DbSet<BlogTag> BlogTag { get; set; }
+        public DbSet<Log> Log { get; set; }
     }
 }
 
