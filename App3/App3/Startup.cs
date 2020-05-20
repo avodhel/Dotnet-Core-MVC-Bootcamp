@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using App3.Data.Context;
+using App3.Filters;
 using App3.Service.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
@@ -29,9 +30,14 @@ namespace App3
         {
             services.AddTransient<AuthorService>();
             services.AddTransient<BlogService>();
+
             services.AddDbContext<BlogDbContext>(opt => {
                 opt.UseSqlServer(Configuration.GetConnectionString("BlogDbContext"));
             });
+
+            //filters
+            services.AddScoped<CustomActionFilter>();
+
             services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();
         }
