@@ -54,6 +54,7 @@ namespace App3.Controllers
 
         [ServiceFilter(typeof(CustomActionFilter))]
         [ServiceFilter(typeof(CustomHeaderActionFilter))]
+        [ServiceFilter(typeof(ViewDataActionFilter))]
         public IActionResult Detail(int id)
         {
             var blog = _service.GetById(id);

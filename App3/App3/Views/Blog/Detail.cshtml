@@ -53,6 +53,14 @@
 </style>
 
 <h1>@Model.Title</h1>
+
+@if (!string.IsNullOrWhiteSpace(ViewData["Message"].ToString()))
+{
+    <div class="alert alert-success">
+        <span>@ViewData["Message"].ToString()</span>
+    </div>
+}
+
 <br />
 <div class="container">
     <div class="row header">
