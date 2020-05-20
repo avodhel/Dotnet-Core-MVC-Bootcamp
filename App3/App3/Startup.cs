@@ -37,6 +37,7 @@ namespace App3
 
             //filters
             services.AddScoped<CustomActionFilter>();
+            services.AddScoped<CustomHeaderActionFilter>();
 
             services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();

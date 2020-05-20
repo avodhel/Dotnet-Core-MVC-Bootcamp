@@ -53,6 +53,7 @@ namespace App3.Controllers
         }
 
         [ServiceFilter(typeof(CustomActionFilter))]
+        [ServiceFilter(typeof(CustomHeaderActionFilter))]
         public IActionResult Detail(int id)
         {
             var blog = _service.GetById(id);
@@ -61,6 +62,7 @@ namespace App3.Controllers
             return View(model);
         }
 
+        [ServiceFilter(typeof(CustomHeaderActionFilter))]
         public JsonResult Like(int id)
         {
             var likeCount = _service.Like(id);
