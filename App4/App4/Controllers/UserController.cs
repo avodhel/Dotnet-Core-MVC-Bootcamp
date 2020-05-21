@@ -71,5 +71,11 @@ namespace App4.Controllers
             }
             return View();
         }
+
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
