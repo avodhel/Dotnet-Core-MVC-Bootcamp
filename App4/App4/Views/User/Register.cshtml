@@ -1,0 +1,33 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Register</h1>
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    <div class="container">
+        <div class="row form-group">
+            @Html.Label(null, "Email", new { @class = "col-md-3" })
+            @Html.TextBoxFor(x => x.Email, null, new { @class = "col-md-3 form-control" })
+        </div>
+        <div class="row form-group">
+            @Html.Label(null, "Kullanıcı Adı", new { @class = "col-md-3" })
+            @Html.TextBoxFor(x => x.UserName, null, new { @class = "col-md-3 form-control" })
+        </div>
+        <div class="row form-group">
+            @Html.Label(null, "Şifre", new { @class = "col-md-3" })
+            @Html.TextBoxFor(x => x.Password, null, new { @class = "col-md-3 form-control", type = "password" })
+        </div>
+
+        <div class="row form-group">
+            @Html.Label(null, "Şifre Tekrarı", new { @class = "col-md-3" })
+            @Html.TextBoxFor(x => x.ConfirmPassword, null, new { @class = "col-md-3 form-control", type = "password" })
+        </div>
+
+        <div class="row form-group">
+            <input type="submit" value="Kaydol" class="btn btn-info" />
+        </div>
+    </div>
+}
