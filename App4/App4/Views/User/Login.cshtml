@@ -1,0 +1,23 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login</h1>
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    <div class="container">
+        <div class="row form-group">
+            @Html.Label(null, "Kullanıcı Adı", new { @class = "col-md-3 form-label" })
+            @Html.TextBoxFor(x => x.UserName, null, new { @class = "col-md-3 form-control" })
+        </div>
+        <div class="row form-group">
+            @Html.Label(null, "Şifre", new { @class = "col-md-3 form-label" })
+            @Html.TextBoxFor(x => x.Password, null, new { @class = "col-md-3 form-control", type = "password" })
+        </div>
+        <div class="row form-group">
+            <input type="submit" value="Giriş" class="btn btn-light" />
+        </div>
+    </div>
+}

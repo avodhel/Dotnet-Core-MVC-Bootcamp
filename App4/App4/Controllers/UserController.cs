@@ -50,8 +50,25 @@ namespace App4.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
+            var user = await _userManager.FindByNameAsync(model.UserName);
+            if (user != null)
+            {
+                var result = await _signInManager.PasswordSignInAsync(user, model.Password, true, true);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("Giriş Hatası", "Kullanıcı bilgilerinden kaynaklı bir hata oluştu");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("Varolmayan kullanıcı.", "Girdiğiniz bilgiler ile eşleşen kullanıcı bulunamadı");
+            }
             return View();
         }
     }
