@@ -3,6 +3,7 @@
 @inject UserManager<IdentityUser> UserManager
 
 <ul class="navbar-nav">
+@**kullanıcının login olup olmadığının kontrolünün yapıldığı alan*@
 @if (SignInManager.IsSignedIn(User))
 {
     <li class="nav-item">
