@@ -1,9 +1,12 @@
-﻿using System.Security.Claims;
+﻿using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using App4.Models;
 using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace App4.Controllers
 {
@@ -11,10 +14,15 @@ namespace App4.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-        public UserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        private readonly RoleManager<IdentityRole> _roleManager;
+
+        public UserController(UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager,
+            RoleManager<IdentityRole> roleManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public IActionResult Register()
@@ -141,5 +149,34 @@ namespace App4.Controllers
             return View();
         }
 
+        [Authorize(Roles = "admin")]
+        public IActionResult AssignRole()
+        {
+            var roles = _roleManager.Roles.ToList().Select(x => new SelectListItem()
+            {
+                Value = x.Name,
+                Text = x.Name
+            }).ToList();
+
+            ViewBag.Roles = roles;
+
+            var users = _userManager.Users.ToList().Select(x => new SelectListItem()
+            {
+                Text = x.Email,
+                Value = x.Email
+            }).ToList();
+
+            ViewBag.Users = users;
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> AssignRole(string email, string roleName)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            await _userManager.AddToRoleAsync(user, roleName);
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

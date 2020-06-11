@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewData["Title"] = "AssignRole";
+}
+
+<h1>AssignRole</h1>
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+
+    <div class="container">
+        <div class="form-group">
+            @Html.Label("UserName", "User Name", new { @class = "form-label" })
+            @Html.DropDownList("email", (List<SelectListItem>)ViewBag.Users, null, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.Label("RoleName", "Role Name", new { @class = "form-label" })
+            @Html.DropDownList("roleName", (List<SelectListItem>)ViewBag.Roles, null, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Rol Ata" />
+        </div>
+    </div>
+}
