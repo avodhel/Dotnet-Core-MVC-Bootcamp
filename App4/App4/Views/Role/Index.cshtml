@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model List<IdentityRole>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Roles</h1>
+<a href="~/Role/Add" class="btn btn-primary">Yeni Rol Tanımla</a>
+<div class="container">
+    @foreach (var role in Model)
+    {
+        <div class="row">
+            <p>@role.Name</p>
+        </div>
+    }
+</div>
+
+
+
