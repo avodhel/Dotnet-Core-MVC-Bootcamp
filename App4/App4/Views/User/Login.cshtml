@@ -19,5 +19,11 @@
         <div class="row form-group">
             <input type="submit" value="Giriş" class="btn btn-light" />
         </div>
+
+
+        <div class="row form-group">
+            @*@Html.ActionLink("Google ile giriş yap", "GoogleLogin", "User", new { Context.Request.QueryString }, new { @class = "btn btn-danger" })*@
+            <a href="~/User/GoogleLogin\@Context.Request.QueryString" class="btn btn-danger">Google ile giriş yap</a>
+        </div>
     </div>
 }

@@ -41,6 +41,12 @@ namespace App4
                     options.ClientSecret = Configuration.GetValue<string>("Google:ClientSecret");
                 });
 
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/User/Login";
+                options.LogoutPath = "/User/Logout";
+            });
+
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
