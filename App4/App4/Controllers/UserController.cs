@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Security.Claims;
+using System.Threading.Tasks;
 using App4.Models;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -77,5 +79,62 @@ namespace App4.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+
+        public IActionResult GoogleLogin(string returnUrl = "/")
+        {
+            string redirectUrl = Url.Action("ExternalResponse", "User", new { returnUrl = returnUrl });
+
+            var authenticationProperties = _signInManager.ConfigureExternalAuthenticationProperties("Google", redirectUrl);
+
+            return new ChallengeResult(GoogleDefaults.AuthenticationScheme, authenticationProperties);
+        }
+
+        public async Task<IActionResult> ExternalResponse(string returnUrl = "/")
+        {
+            ExternalLoginInfo loginInfo = await _signInManager.GetExternalLoginInfoAsync();
+
+            if (loginInfo == null)
+            {
+                return RedirectToAction("Login", "User");
+            }
+
+            var user = await _userManager.FindByEmailAsync(loginInfo.Principal.FindFirst(ClaimTypes.Email).Value);
+
+            //kayıtlı kullanıcı için
+            if (user != null)
+            {
+                await _signInManager.SignInAsync(user, true);
+                return Redirect(returnUrl);
+            }
+
+            //Db de kaydı olmayan kullanıcı için yapılacak işlemler
+            var signInResult = await _signInManager.ExternalLoginSignInAsync(loginInfo.LoginProvider, loginInfo.ProviderKey, true);
+
+            if (signInResult.Succeeded)
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                user = new IdentityUser
+                {
+                    Email = loginInfo.Principal.FindFirst(ClaimTypes.Email).Value,
+                    UserName = loginInfo.Principal.FindFirst(ClaimTypes.Email).Value
+                };
+
+                var identityResult = await _userManager.CreateAsync(user);
+
+                if (identityResult.Succeeded)
+                {
+                    var loginResult = await _userManager.AddLoginAsync(user, loginInfo);
+                    if (loginResult.Succeeded)
+                    {
+                        await _signInManager.SignInAsync(user, true);
+                    }
+                }
+            }
+            return Redirect(returnUrl);
+        }
+
     }
 }

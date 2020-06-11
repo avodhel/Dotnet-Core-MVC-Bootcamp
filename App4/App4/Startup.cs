@@ -34,6 +34,13 @@ namespace App4
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    options.ClientId = Configuration.GetValue<string>("Google:ClientId");
+                    options.ClientSecret = Configuration.GetValue<string>("Google:ClientSecret");
+                });
+
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

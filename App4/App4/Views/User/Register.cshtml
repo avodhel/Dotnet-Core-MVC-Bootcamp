@@ -29,5 +29,10 @@
         <div class="row form-group">
             <input type="submit" value="Kaydol" class="btn btn-info" />
         </div>
+
+
+        <div class="row form-group">
+            @Html.ActionLink("Google ile giriş yap", "GoogleLogin", "User", new { Context.Request.QueryString }, new { @class = "btn btn-danger" })
+        </div>
     </div>
 }
