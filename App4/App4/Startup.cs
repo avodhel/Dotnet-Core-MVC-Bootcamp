@@ -31,7 +31,11 @@ namespace App4
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddIdentity<IdentityUser, IdentityRole>(
+                options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddAuthentication()
@@ -45,6 +49,7 @@ namespace App4
             {
                 options.LoginPath = "/User/Login";
                 options.LogoutPath = "/User/Logout";
+                options.AccessDeniedPath = "/User/Denied";
             });
 
             services.AddControllersWithViews();

@@ -14,5 +14,18 @@ namespace App4.Controllers
         {
             return View();
         }
+
+        [Authorize(Roles = "admin")]
+        public IActionResult PageForAdmin()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "test")]
+        public IActionResult PageForTest()
+        {
+            return View();
+        }
+
     }
 }

@@ -136,5 +136,10 @@ namespace App4.Controllers
             return Redirect(returnUrl);
         }
 
+        public IActionResult Denied()
+        {
+            return View();
+        }
+
     }
 }
