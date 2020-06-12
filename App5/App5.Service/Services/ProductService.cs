@@ -1,4 +1,5 @@
 ﻿using App5.Data.Context;
+using App5.Service.Model.Request;
 using App5.Service.Model.Response;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,19 @@ namespace App5.Service.Services
                 Price = productEntity.Price,
                 StockCount = productEntity.StockCount
             };
+        }
+
+        public List<ProductResponse> Query(ProductQuery productQuery)
+        {
+            return _context.Product.Where(x => x.Id == productQuery.Id || x.Brand == productQuery.Brand)
+                .ToList().Select(x => new ProductResponse()
+                {
+                    Brand = x.Brand,
+                    Id = x.Id,
+                    Name = x.Name,
+                    Price = x.Price,
+                    StockCount = x.StockCount
+                }).ToList();
         }
     }
 }
