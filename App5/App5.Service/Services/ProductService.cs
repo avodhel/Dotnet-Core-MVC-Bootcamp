@@ -62,6 +62,19 @@ namespace App5.Service.Services
             }).ToList();
         }
 
+        public List<ProductResponse> Query(ProductQuery productQuery)
+        {
+            return _context.Product.Where(x => x.Id == productQuery.Id || x.Brand == productQuery.Brand)
+                .ToList().Select(x => new ProductResponse()
+                {
+                    Brand = x.Brand,
+                    Id = x.Id,
+                    Name = x.Name,
+                    Price = x.Price,
+                    StockCount = x.StockCount
+                }).ToList();
+        }
+
         public int Update(ProductUpdateRequest product)
         {
             var productEntity = _context.Product.FirstOrDefault(x => x.Id == product.Id);
@@ -77,17 +90,15 @@ namespace App5.Service.Services
             return _context.SaveChanges();
         }
 
-        public List<ProductResponse> Query(ProductQuery productQuery)
+        public int Delete(int productId)
         {
-            return _context.Product.Where(x => x.Id == productQuery.Id || x.Brand == productQuery.Brand)
-                .ToList().Select(x => new ProductResponse()
-                {
-                    Brand = x.Brand,
-                    Id = x.Id,
-                    Name = x.Name,
-                    Price = x.Price,
-                    StockCount = x.StockCount
-                }).ToList();
+            var productEntity = _context.Product.FirstOrDefault(x => x.Id == productId);
+            if (productEntity == null)
+            {
+                return -1;
+            }
+            _context.Product.Remove(productEntity);
+            return _context.SaveChanges();
         }
     }
 }

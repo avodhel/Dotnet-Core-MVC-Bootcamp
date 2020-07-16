@@ -53,5 +53,21 @@ namespace App5.Controllers
             }
             return NotFound("İlgili ürün bulunamadı/güncellenemedi");
         }
+
+        [HttpDelete("{productId}")]
+        public IActionResult Delete(int productId)
+        {
+            int affectedRowCount = _service.Delete(productId);
+
+            if (affectedRowCount > 0)
+            {
+                return Ok();
+            }
+            if (affectedRowCount == -1)
+            {
+                return NotFound();
+            }
+            return UnprocessableEntity();
+        }
     }
 }
