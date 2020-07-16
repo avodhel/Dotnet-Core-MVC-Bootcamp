@@ -62,6 +62,21 @@ namespace App5.Service.Services
             }).ToList();
         }
 
+        public int Update(ProductUpdateRequest product)
+        {
+            var productEntity = _context.Product.FirstOrDefault(x => x.Id == product.Id);
+
+            if (productEntity == null)
+            {
+                return -1;
+            }
+            productEntity.StockCount = product.StockCount;
+            productEntity.Price = product.Price;
+
+            _context.Product.Update(productEntity);
+            return _context.SaveChanges();
+        }
+
         public List<ProductResponse> Query(ProductQuery productQuery)
         {
             return _context.Product.Where(x => x.Id == productQuery.Id || x.Brand == productQuery.Brand)

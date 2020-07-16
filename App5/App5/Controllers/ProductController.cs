@@ -41,5 +41,17 @@ namespace App5.Controllers
         {
             return _service.GetByCategory(categoryId);
         }
+
+        //HttpPut genelde update metotları için kullanılır.
+        [HttpPut]
+        public IActionResult Update([FromBody]ProductUpdateRequest product)
+        {
+            var affectedRowCount = _service.Update(product);
+            if (affectedRowCount > 0)
+            {
+                return Ok("Güncelleme Başarılı");
+            }
+            return NotFound("İlgili ürün bulunamadı/güncellenemedi");
+        }
     }
 }
