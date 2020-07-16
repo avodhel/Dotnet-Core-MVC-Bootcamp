@@ -33,6 +33,11 @@ namespace App5.Service.Services
         public ProductResponse Get(int id)
         {
             var productEntity = _context.Product.FirstOrDefault(x => x.Id == id);
+            if (productEntity == null)
+            {
+                return null;
+            }
+
             return new ProductResponse
             {
                 Brand = productEntity.Brand,

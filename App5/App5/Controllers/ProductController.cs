@@ -25,9 +25,15 @@ namespace App5.Controllers
         }
 
         [HttpGet("{id}")]
-        public ProductResponse Get([FromRoute]int id)
+        public IActionResult Get([FromRoute]int id)
         {
-            return _service.Get(id);
+            var product = _service.Get(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(product);
         }
 
         [HttpPost]
