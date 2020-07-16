@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using App5.Data.Context;
 using App5.Service.Services;
@@ -13,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 
 namespace App5
 {
@@ -37,6 +40,15 @@ namespace App5
 
             services.AddTransient<ProductService>();
             services.AddTransient<CategoryService>();
+
+            //swagger'da kullanacaðýmýz dökümantasyonu tanýmlýyoruz.
+            services.AddSwaggerGen(c => {
+                c.SwaggerDoc("v1", new OpenApiInfo()
+                {
+                    Title = "ECommerce API",
+                    Version = "v1"
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +58,12 @@ namespace App5
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            //uygulamanýn swagger kullanacaðýný belirtiyoruz.
+            app.UseSwagger()
+               .UseSwaggerUI(c => {
+                   c.SwaggerEndpoint("/swagger/v1/swagger.json", "ECommerce API v1");
+               });
 
             app.UseHttpsRedirection();
 

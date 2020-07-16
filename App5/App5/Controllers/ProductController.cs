@@ -19,6 +19,7 @@ namespace App5.Controllers
             _service = service;
         }
 
+        [HttpGet]
         public List<ProductResponse> GetAll()
         {
             return _service.GetAll();
