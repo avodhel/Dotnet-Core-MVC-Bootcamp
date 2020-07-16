@@ -43,6 +43,25 @@ namespace App5.Service.Services
             };
         }
 
+        public List<ProductResponse> GetByCategory(int categoryId)
+        {
+            var query = _context.Product.Join(_context.Category,
+                                              product => product.CategoryId,
+                                              category => category.Id,
+                                             (product, category) => new { product, CategoryId = category.Id })
+                                        .Where(result => result.CategoryId == categoryId)
+                                        .ToList();
+
+            return query.Select(x => new ProductResponse
+            {
+                Id = x.product.Id,
+                Name = x.product.Name,
+                Price = x.product.Price,
+                Brand = x.product.Brand,
+                StockCount = x.product.StockCount
+            }).ToList();
+        }
+
         public List<ProductResponse> Query(ProductQuery productQuery)
         {
             return _context.Product.Where(x => x.Id == productQuery.Id || x.Brand == productQuery.Brand)

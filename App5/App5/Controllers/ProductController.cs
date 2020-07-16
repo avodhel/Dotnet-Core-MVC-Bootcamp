@@ -35,5 +35,11 @@ namespace App5.Controllers
         {
             return _service.Query(productQuery);
         }
+
+        [HttpGet("{categoryId}")]
+        public List<ProductResponse> ByCategory(int categoryId)
+        {
+            return _service.GetByCategory(categoryId);
+        }
     }
 }
