@@ -36,6 +36,7 @@ namespace App5
             });
 
             services.AddTransient<ProductService>();
+            services.AddTransient<CategoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
