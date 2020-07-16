@@ -19,6 +19,10 @@ namespace App5.Controllers
             _service = service;
         }
 
+        /// <summary>
+        /// Get All Products
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public List<ProductResponse> GetAll()
         {
@@ -37,6 +41,11 @@ namespace App5.Controllers
             return Ok(product);
         }
 
+        /// <summary>
+        /// Get Products By Query
+        /// </summary>
+        /// <param name="productQuery">product query parameter</param>
+        /// <returns>product response</returns>
         [HttpPost]
         public List<ProductResponse> Query([FromBody]ProductQuery productQuery)
         {
@@ -50,6 +59,13 @@ namespace App5.Controllers
         }
 
         //HttpPut genelde update metotları için kullanılır.
+        /// <summary>
+        /// Update spesific product
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
+        /// <response code="200">Güncelleme Başarılı</response>
+        /// <response code="404">İlgili ürün bulunamadı/güncellenemedi</response>
         [HttpPut]
         public IActionResult Update([FromBody]ProductUpdateRequest product)
         {
@@ -61,6 +77,14 @@ namespace App5.Controllers
             return NotFound("İlgili ürün bulunamadı/güncellenemedi");
         }
 
+        /// <summary>
+        /// Delete product by product id
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <returns></returns>
+        /// <response code="200">Ürün silindi</response>
+        /// <response code="404">Silinecek ürün bulunamadı</response>
+        /// <response code="422">Silme işlemi gerçekleşmedi</response>
         [HttpDelete("{productId}")]
         public IActionResult Delete(int productId)
         {

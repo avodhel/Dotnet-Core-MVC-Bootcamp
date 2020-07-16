@@ -48,6 +48,10 @@ namespace App5
                     Title = "ECommerce API",
                     Version = "v1"
                 });
+                //swagger üzerinde commentleri görmek için Xml yorumlarýný swagger'a ekletiyoruz
+                var xmlFileName = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlFilePath = Path.Combine(AppContext.BaseDirectory, xmlFileName);
+                c.IncludeXmlComments(xmlFilePath);
             });
         }
 

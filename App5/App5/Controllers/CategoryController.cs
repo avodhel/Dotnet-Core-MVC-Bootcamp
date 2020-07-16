@@ -19,6 +19,10 @@ namespace App5.Controllers
             _service = service;
         }
 
+        /// <summary>
+        /// Get all product categories
+        /// </summary>
+        /// <returns>all category</returns>
         [HttpGet]
         public List<CategoryResponse> GetAll()
         {
