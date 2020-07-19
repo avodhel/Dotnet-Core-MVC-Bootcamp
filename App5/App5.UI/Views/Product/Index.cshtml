@@ -1,0 +1,44 @@
+﻿@model App5.UI.Models.ViewModel.ProductIndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-3">
+            @* Categories *@
+            @foreach (var category in Model.Categories)
+            {
+                <div>
+                    @Html.ActionLink(category.Name, "#", "#", null, new { @class = "btn btn-info" })
+                </div>
+            }
+        </div>
+        <div class="col-md-9">
+            @* Products *@
+            <div class="row">
+                <div class="col-md-1"><strong>Ürün No</strong></div>
+                <div class="col-md-3"><strong>Ürün Adı</strong></div>
+                <div class="col-md-3"><strong>Marka</strong></div>
+                <div class="col-md-1"><strong>Fiyat</strong></div>
+            </div>
+            @foreach (var product in Model.Products)
+            {
+                <div class="row">
+                    <div class="col-md-1">@product.Id</div>
+                    <div class="col-md-3">@product.Name</div>
+                    <div class="col-md-3">@product.Brand</div>
+                    <div class="col-md-1">@product.Price</div>
+                    <div class="col-md-4 row">
+                        @Html.ActionLink("Düzenle", "Update", "Product", new { productId = product.Id }, new { @class = "btn btn-info" })
+
+                        @Html.ActionLink("Sil", "Delete", "Product", new { productId = product.Id }, new { @class = "btn btn-danger" })
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
