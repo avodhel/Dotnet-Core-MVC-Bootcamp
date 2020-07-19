@@ -1,4 +1,5 @@
-﻿using App5.UI.Models.Response;
+﻿using App5.UI.Models.Request;
+using App5.UI.Models.Response;
 using App5.UI.Models.ViewModel;
 using AutoMapper;
 using System;
@@ -13,6 +14,8 @@ namespace App5.UI.MappingProfiles
         public ProductMappingProfile()
         {
             CreateMap<ProductResponse, ProductViewModel>();
+            CreateMap<ProductViewModel, ProductResponse>();
+            CreateMap<ProductViewModel, ProductUpdateRequest>();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using App5.UI.Clients;
+using App5.UI.Models.Request;
 using App5.UI.Models.Response;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,16 @@ namespace App5.UI.Services
         public async Task<HttpStatusCode> Delete(int productId)
         {
             return await _client.Delete(productId);
+        }
+
+        public async Task<ProductResponse> Get(int productId)
+        {
+            return await _client.Get(productId);
+        }
+
+        internal async Task Update(ProductUpdateRequest productUpdateRequest)
+        {
+            await _client.Update(productUpdateRequest);
         }
     }
 }

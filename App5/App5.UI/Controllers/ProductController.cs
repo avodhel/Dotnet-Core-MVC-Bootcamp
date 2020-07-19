@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using App5.UI.Models.Request;
 using App5.UI.Models.ViewModel;
 using App5.UI.Services;
 using AutoMapper;
@@ -56,6 +57,23 @@ namespace App5.UI.Controllers
             }
 
             return RedirectToAction("Index", "Product");
+        }
+
+        public async Task<IActionResult> Update(int productId)
+        {
+            var product = await _productService.Get(productId);
+
+            var model = _mapper.Map<ProductViewModel>(product);
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(ProductViewModel model)
+        {
+            var productUpdateRequest = _mapper.Map<ProductUpdateRequest>(model);
+            await _productService.Update(productUpdateRequest);
+
+            return RedirectToAction("Update", "Product", new { productId = model.Id });
         }
     }
 }
