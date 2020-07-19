@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using App5.UI.Models.ViewModel;
 using App5.UI.Services;
@@ -32,6 +33,29 @@ namespace App5.UI.Controllers
             };
 
             return View(model);
+        }
+
+        public async Task<IActionResult> Delete(int productId)
+        {
+            var responseStatusCode = await _productService.Delete(productId);
+
+            switch (responseStatusCode)
+            {
+                case HttpStatusCode.OK:
+                    TempData["Message"] = "Ürün Silindi";
+                    TempData["DeleteStatus"] = "Success";
+                    break;
+                case HttpStatusCode.NotFound:
+                    TempData["Message"] = "Ürün Bulunamadı";
+                    TempData["DeleteStatus"] = "NotFound";
+                    break;
+                case HttpStatusCode.UnprocessableEntity:
+                    TempData["Message"] = "Ürün Silme Başarısız.";
+                    TempData["DeleteStatus"] = "Failed";
+                    break;
+            }
+
+            return RedirectToAction("Index", "Product");
         }
     }
 }

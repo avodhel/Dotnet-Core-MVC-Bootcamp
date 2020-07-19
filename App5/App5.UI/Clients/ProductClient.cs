@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -19,6 +20,12 @@ namespace App5.UI.Clients
         {
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/product/getall");
             return await GetResponse<List<ProductResponse>>(requestMessage);
+        }
+
+        public async Task<HttpStatusCode> Delete(int productId)
+        {
+            var requestMessage = new HttpRequestMessage(HttpMethod.Delete, $"/product/delete/{productId}");
+            return await SendAsync(requestMessage);
         }
     }
 }

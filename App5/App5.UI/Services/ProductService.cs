@@ -3,6 +3,7 @@ using App5.UI.Models.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace App5.UI.Services
@@ -26,6 +27,11 @@ namespace App5.UI.Services
 
                 throw;
             }
+        }
+
+        public async Task<HttpStatusCode> Delete(int productId)
+        {
+            return await _client.Delete(productId);
         }
     }
 }
