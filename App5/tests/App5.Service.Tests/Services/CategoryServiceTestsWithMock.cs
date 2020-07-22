@@ -1,6 +1,7 @@
 ﻿using App5.Data.Context;
 using App5.Data.Entities;
 using App5.Service.Services;
+using App5.Service.Tests.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using System;
@@ -25,11 +26,7 @@ namespace App5.Service.Tests.Services
                 }
             };
 
-            var categoryDbSetMock = new Mock<DbSet<Category>>();
-            categoryDbSetMock
-                .As<IQueryable<Category>>()
-                .Setup(x => x.GetEnumerator())
-                .Returns(categoryList.GetEnumerator());
+            var categoryDbSetMock = TestHelper.GetDbSetMock(categoryList);
 
             var contextMock = new Mock<ECommerceContext>(new DbContextOptions<ECommerceContext>());
             contextMock.Setup(x => x.Category).Returns(categoryDbSetMock.Object);

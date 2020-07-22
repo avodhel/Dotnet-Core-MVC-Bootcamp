@@ -1,6 +1,7 @@
 ﻿using App5.Data.Context;
 using App5.Data.Entities;
 using App5.Service.Services;
+using App5.Service.Tests.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using System;
@@ -27,10 +28,7 @@ namespace App5.Service.Tests.Services
                 }
             };
 
-            var productDbSetMock = new Mock<DbSet<Product>>();
-            productDbSetMock.As<IQueryable<Product>>()
-                .Setup(x => x.GetEnumerator())
-                .Returns(productList.GetEnumerator());
+            var productDbSetMock = TestHelper.GetDbSetMock(productList);
 
             var contextMock = new Mock<ECommerceContext>(new DbContextOptions<ECommerceContext>());
             contextMock.Setup(x => x.Product).Returns(productDbSetMock.Object);
@@ -65,19 +63,7 @@ namespace App5.Service.Tests.Services
                 }
             };
 
-            var productDbSetMock = new Mock<DbSet<Product>>();
-            productDbSetMock.As<IQueryable<Product>>()
-                .Setup(x => x.GetEnumerator())
-                .Returns(productList.GetEnumerator());
-            productDbSetMock.As<IQueryable<Product>>()
-                .Setup(x => x.Expression)
-                .Returns(productList.AsQueryable().Expression);
-            productDbSetMock.As<IQueryable<Product>>()
-                .Setup(x => x.ElementType)
-                .Returns(productList.AsQueryable().ElementType);
-            productDbSetMock.As<IQueryable<Product>>()
-                .Setup(x => x.Provider)
-                .Returns(productList.AsQueryable().Provider);
+            var productDbSetMock = TestHelper.GetDbSetMock(productList);
 
             var contextMock = new Mock<ECommerceContext>(new DbContextOptions<ECommerceContext>());
             contextMock.Setup(x => x.Product).Returns(productDbSetMock.Object);
