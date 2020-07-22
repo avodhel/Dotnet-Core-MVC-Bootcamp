@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App5.Service", "App5.Servic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App5.Data", "App5.Data\App5.Data.csproj", "{5CC73857-BDDB-4F8B-9E5E-76754F11E4D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App5.UI", "App5.UI\App5.UI.csproj", "{54B2B108-3CE8-42E5-85CB-D43AC773A0B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App5.UI", "App5.UI\App5.UI.csproj", "{54B2B108-3CE8-42E5-85CB-D43AC773A0B7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8438803C-A0E0-463A-A30C-798333F407D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App5.Service.Tests", "tests\App5.Service.Tests\App5.Service.Tests.csproj", "{198F5F0F-1A94-4601-857C-923264C2CED3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +37,16 @@ Global
 		{54B2B108-3CE8-42E5-85CB-D43AC773A0B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54B2B108-3CE8-42E5-85CB-D43AC773A0B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54B2B108-3CE8-42E5-85CB-D43AC773A0B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{198F5F0F-1A94-4601-857C-923264C2CED3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{198F5F0F-1A94-4601-857C-923264C2CED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{198F5F0F-1A94-4601-857C-923264C2CED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{198F5F0F-1A94-4601-857C-923264C2CED3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{198F5F0F-1A94-4601-857C-923264C2CED3} = {8438803C-A0E0-463A-A30C-798333F407D9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2522D96F-49A0-47A1-A184-B5C0AF577480}
