@@ -1,4 +1,5 @@
 ﻿using App5.Data.Context;
+using App5.Service.Model.Request;
 using App5.Service.Services;
 using App5.Service.Tests.Helpers;
 using Microsoft.EntityFrameworkCore;
@@ -59,6 +60,46 @@ namespace App5.Service.Tests.Services
 
             // Assert
             Assert.Null(product);
+        }
+
+        [Fact]
+        public void UpdateShouldSuccess()
+        {
+            // Arrange
+            var context = TestHelper.GetContext();
+            var productService = new ProductService(context);
+            var productUpdateRequest = new ProductUpdateRequest()
+            {
+                Id = 5,
+                Price = 12,
+                StockCount = 150
+            };
+
+            // Act
+            var affectedRowCount = productService.Update(productUpdateRequest);
+
+            // Assert
+            Assert.True(affectedRowCount > 0);
+        }
+
+        [Fact]
+        public void UpdateShouldFail()
+        {
+            // Arrange
+            var context = TestHelper.GetContext();
+            var productService = new ProductService(context);
+            var productUpdateRequest = new ProductUpdateRequest()
+            {
+                Id = -1,
+                Price = 25,
+                StockCount = 150
+            };
+
+            // Act
+            var affectedRowCount = productService.Update(productUpdateRequest);
+
+            // Assert
+            Assert.Equal(-1, affectedRowCount);
         }
     }
 }
