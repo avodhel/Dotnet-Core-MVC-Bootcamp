@@ -1,5 +1,6 @@
 ﻿using App5.Data.Context;
 using App5.Data.Entities;
+using App5.Service.Model.Request;
 using App5.Service.Services;
 using App5.Service.Tests.Helpers;
 using Microsoft.EntityFrameworkCore;
@@ -75,6 +76,49 @@ namespace App5.Service.Tests.Services
 
             // Assert
             Assert.Equal(expectedProductName, product.Name);
+        }
+
+        [Fact]
+        public void UpdateShouldSuccess()
+        {
+            // Arrange
+            var productList = new List<Product>()
+            {
+                new Product()
+                {
+                    Id=6,
+                    Name="Test",
+                    StockCount=0,
+                    Price=10
+                }
+            };
+
+            var productDbSetMock = TestHelper.GetDbSetMock(productList);
+
+            var contextMock = new Mock<ECommerceContext>(new DbContextOptions<ECommerceContext>());
+            contextMock.Setup(x => x.Product).Returns(productDbSetMock.Object);
+            contextMock.Setup(x => x.SaveChanges()).Returns(1);
+
+            var productService = new ProductService(contextMock.Object);
+
+
+            var productUpdateRequest = new ProductUpdateRequest()
+            {
+                Id = 6,
+                Price = 25,
+                StockCount = 150
+            };
+
+            // Act
+            var affectedRowCount = productService.Update(productUpdateRequest);
+
+            // Assert
+            Assert.True(affectedRowCount > 0);
+
+            //test çalıştığında herhangi bir product bir kez updatelenmiş olmalı
+            contextMock.Verify(x => x.Product.Update(It.IsAny<Product>()), Times.Once);
+            //test çalıştığında mock üzerindeki savechanges bir kere çağrılmış olmalı
+            contextMock.Verify(x => x.SaveChanges(), Times.Once);
         }
     }
 }
