@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App5", "App5\App5.csproj", "{31193F40-DCB3-4C03-A34A-35795CCAB119}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App5.Api", "App5\App5.Api.csproj", "{31193F40-DCB3-4C03-A34A-35795CCAB119}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App5.Service", "App5.Service\App5.Service.csproj", "{11C4F1BD-1E47-4F38-88CE-B4AF78D4D273}"
 EndProject
@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App5.UI", "App5.UI\App5.UI.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8438803C-A0E0-463A-A30C-798333F407D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App5.Service.Tests", "tests\App5.Service.Tests\App5.Service.Tests.csproj", "{198F5F0F-1A94-4601-857C-923264C2CED3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App5.Service.Tests", "tests\App5.Service.Tests\App5.Service.Tests.csproj", "{198F5F0F-1A94-4601-857C-923264C2CED3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
