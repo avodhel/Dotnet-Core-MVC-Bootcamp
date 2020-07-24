@@ -67,7 +67,7 @@ namespace App5.Service.Services
             }).ToList();
         }
 
-        public List<ProductResponse> Query(ProductQuery productQuery)
+        public List<ProductResponse> Query(ProductQueryRequest productQuery)
         {
             return _context.Product.Where(x => x.Id == productQuery.Id || x.Brand == productQuery.Brand)
                 .ToList().Select(x => new ProductResponse()

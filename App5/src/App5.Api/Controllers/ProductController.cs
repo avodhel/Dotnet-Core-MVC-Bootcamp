@@ -47,7 +47,7 @@ namespace App5.Controllers
         /// <param name="productQuery">product query parameter</param>
         /// <returns>product response</returns>
         [HttpPost]
-        public List<ProductResponse> Query([FromBody]ProductQuery productQuery)
+        public List<ProductResponse> Query([FromBody]ProductQueryRequest productQuery)
         {
             return _service.Query(productQuery);
         }
